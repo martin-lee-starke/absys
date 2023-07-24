@@ -1,0 +1,111 @@
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+@media print {
+
+  @page {
+    size: A4 landscape;
+    position: relative;
+    margin: 0mm;
+    padding: 5mm 3mm;
+  }
+
+  @page :first {
+    size: A4 portrait;
+    padding-top: 5mm;
+    padding-left: 20mm;
+  }
+
+  #page-1 {
+    page-break-after: always;
+    break-after: always;
+    font-size: 14pt;
+    line-height: normal; /* Is this being applied? */
+  }
+
+  #address {
+    position: absolute;
+    top: 30mm;
+  }
+
+  #von {
+    font-size: 6pt;
+  }
+
+  #an {
+    padding-top: 5mm;
+    font-size: 10pt;
+  }
+
+  #details {
+    position: absolute;
+    top: 120mm;
+  }
+
+  #page-2 {
+    page-break-after: always;
+    break-after: always;
+    font-size: 9pt;
+  }
+
+  .page-subsequent {
+    font-size: 9pt;
+  }
+
+  /* Temporary fix. Do not know why Weasyprint is not interpreting the bootstrap.css as intended. This overrides it. */
+  .glyphicon-ok:before {
+    font-family: Arial, Helvetica, sans-serif;
+    content: "\2713"; /* Note that CSS uses hex version! */
+  }
+
+  .table th.weekend, .table td.weekend {
+    background-color: yellow !important;
+  }
+
+  .table th.zeitraum-kontext, .table td.zeitraum-kontext {
+    background-color: lightgrey !important;
+  }
+
+  .table td.vermindert {
+    background-color: red !important;
+  }
+
+  /*
+   Einzelne 'Tagesposition' in der 'Schülerdetailansicht'.
+   Da hier min. 31 Tage auf eine Seite passen müssen sparen wir am padding.
+   */
+  table tr.schuelerposition td {
+    padding: 1px !important;
+  }
+}
+
+.dark input {
+  color: #000;
+}
+
+a {
+  color: #000;
+}
+
+a:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+.rechnung-buttons {
+  min-width: 22em;
+}
+
+.green {
+  background-color: LightGreen;
+}
+
+.orange {
+  background-color: LightSalmon;
+}
+
+input[type="checkbox"] {
+  transform:scale(2.2, 2.2);
+  margin-right: 1.1em;
+}

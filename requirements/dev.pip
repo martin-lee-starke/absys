@@ -1,0 +1,23 @@
+# This file is used for all packages required for local development.
+
+-r ./docs.pip
+-r ./test.pip
+-r ./test-local.pip
+
+Glances
+# Bottle is required to run Glances in webserver mode
+bottle
+bumpversion
+django-debug-toolbar
+django-template-debug
+envdir
+flake8
+ipython
+isort
+# Newer versions of pdbpp do not work with Python 3
+# See https://bitbucket.org/antocuni/pdb/issue/45/fails-to-install-on-os-x-1010-python-343
+pdbpp
+pg-activity
+thefuck
+pydotplus
+django-extensions

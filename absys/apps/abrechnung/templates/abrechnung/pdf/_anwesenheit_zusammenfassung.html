@@ -1,0 +1,115 @@
+{% load abrechnung_filters %}
+{% load abrechnung_tags %}
+
+<h3>Zusammenfassung der Schüleranwesenheiten im Rechnungszeitraum für {{ einrichtungsrechnung.einrichtung }}</h3>
+{% with schuelerdaten=einrichtungsrechnung.get_schuelerdaten darstellungszeitraeume=einrichtungsrechnung.rechnung_sozialamt.get_tage %}
+{% with prefix_zeitraum=einrichtungsrechnung.get_prefix_tage suffix_zeitraum=einrichtungsrechnung.get_suffix_tage %}
+{# Wir nutzen ein zweites 'with tag' um die Zeilenlänge vertretbar zu halten. Es ist nicht wirklich notwendig. #}
+{% get_prefixdaten einrichtungsrechnung prefix_zeitraum as prefix_schuelerdaten %}
+{% get_suffixdaten einrichtungsrechnung suffix_zeitraum as suffix_schuelerdaten %}
+
+{% for zeitraum in darstellungszeitraeume %}
+
+  {% with prefix=forloop.first suffix=forloop.last %}
+  {% comment %}
+  Der Grund warum wir extra pre/suffix variablen einführen ist der das wir so auch noch Zugriff
+  auf die Information haben wenn die Hauptschhleife (für den Darstellungszeitraum) weitere
+  geschachtelte Schleifen beinhaltet. Hier wäre es nicht ohne weiteres möglich auf die
+  Elternschleife zuzugreifen. Dadurch vereinfacht sich unser Templatecode beachtlich.
+  {% endcomment %}
+
+  {% with start=zeitraum|first ende=zeitraum|last %}
+  <h4>Zusammenfassung für den Darstellungszeitraum {{ start|date }} bis {{ ende|date }}</h3>
+  {% endwith %}
+
+  <table class="table">
+    <thead>
+      {# Zeile für Monatsnamen #}
+      <tr>
+        <th></th>
+        {% if prefix %}
+          {# Stelle Monatsnamen für Kontexttage vorran. #}
+          {% with monate=prefix_zeitraum|monatsueberschriften %}
+          {% for monat, zellen in monate.items %}
+            <th colspan="{{ zellen }}">{{ monat|monatsname}}</th>
+          {% endfor %}
+          {% endwith %}
+        {% endif %}
+
+        {% with monate=zeitraum|monatsueberschriften %}
+        {% for monat, zellen in monate.items %}
+          <th colspan="{{ zellen }}">{{ monat|monatsname}}</th>
+        {% endfor %}
+        {% endwith %}
+
+        {% if suffix %}
+          {# Stelle Monatsnamen für Kontexttage hinten an. #}
+          {% with monate=suffix_zeitraum|monatsueberschriften %}
+          {% for monat, zellen in monate.items %}
+            <th colspan="{{ zellen }}">{{ monat|monatsname}}</th>
+          {% endfor %}
+          {% endwith %}
+        {% endif %}
+      </tr>
+      {# Zeile für Monatstage #}
+      <tr>
+        <th>Schüler</th>
+        {% if prefix %}
+          {# Stelle Kontexttage vorran. #}
+          {% for datum in prefix_zeitraum %}
+          <th class="zeitraum-kontext">{{ datum.day }}</th>
+          {% endfor %}
+        {% endif %}
+
+        {% for datum in zeitraum %}
+        <th class="{% zusammenfassung_klasse datum ist_kontext %}">{{ datum.day }}</th>
+        {% endfor %}
+
+        {% if suffix %}
+          {# Stelle Kontexttage hinten an. #}
+          {% for datum in suffix_zeitraum %}
+          <th class="zeitraum-kontext">{{ datum.day }}</th>
+          {% endfor %}
+        {% endif %}
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for schueler, daten in schuelerdaten.items %}
+      <tr>
+        <td>{{ schueler }}</td>
+        {% if prefix %}
+          {% get_item prefix_schuelerdaten schueler as prefix_daten %}
+          {% for datum in prefix_zeitraum %}
+            {% get_item prefix_daten datum as anwesenheit %}
+            <td class="zeitraum-kontext">
+              {{ anwesenheit|zusammenfassung_kontext_anwesenheitssymbol }}
+            </td>
+          {% endfor %}
+        {% endif %}
+
+        {% for datum in zeitraum %}
+          {% get_item daten datum as position %}
+          <td class="{% zusammenfassung_klasse datum vermindert=position.vermindert %}">
+            {{ position|zusammenfassung_anwesenheitssymbol:daten }}
+          </td>
+        {% endfor %}
+
+        {% if suffix %}
+          {% get_item suffix_schuelerdaten schueler as suffix_daten %}
+          {% for datum in suffix_zeitraum %}
+            {% get_item suffix_daten datum as anwesenheit %}
+            <td class="zeitraum-kontext">
+              {{ anwesenheit|zusammenfassung_kontext_anwesenheitssymbol }}
+            </td>
+          {% endfor %}
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div style="page-break-before:always;"></div>
+  {% endwith %}
+{% endfor %}
+{% endwith %}
+{% endwith %}

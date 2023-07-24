@@ -1,0 +1,5 @@
+# This file is used for testing on continuous integration servers with tox.
+
+codecov
+django-coverage-plugin
+tox

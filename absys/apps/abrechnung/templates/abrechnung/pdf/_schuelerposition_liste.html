@@ -1,0 +1,46 @@
+{# Snippet welches jeden Tag eines Schülers als Liste darstellt. #}
+
+<h4> - Abgerechnete Tage - </h4>
+<table class="table table-striped">
+  <thead style="display: table-row-group">
+      <tr>
+      <th>Datum</th>
+      <th>Tagart</th>
+      <th>Anwesenheit</th>
+
+      {% if einrichtungsrechnung.einrichtung.konfiguration.tage == 365 %}
+        <th>Bettengeld</th>
+      {% endif %}
+
+      <th>
+        Pflegesatz
+        {% if einrichtungsrechnung.einrichtung.konfiguration.tage == 280 %} / Abwesenheitsvergütung{% endif %}
+        {% if einrichtungsrechnung.einrichtung.konfiguration.tage == 365 %} / Bettengeld{% endif %}
+      </th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for schuelerposition in einrichtungsposition.detailabrechnung.all %}
+      <tr class="schuelerposition">
+        <td>{{ schuelerposition.datum|date:"SHORT_DATE_FORMAT" }} </td>
+        <td>{{ schuelerposition.tag_art }}</td>
+        <td>
+          {% if schuelerposition.abwesend %}
+            Fehltag
+          {% else %}
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+          {% endif %}</td>
+
+        {% if einrichtungsrechnung.einrichtung.konfiguration.tage == 365 %}
+          <td>
+            {% if schuelerposition.abwesend %}
+              {{ schuelerposition.vermindert|yesno:"ja,nein" }}
+            {% endif %}
+        {% endif %}
+
+        <td>{{ schuelerposition.pflegesatz }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
