@@ -93,7 +93,7 @@ class Common(Configuration):
 
     USE_L10N = True
 
-    USE_TZ = True
+    #USE_TZ = True #Sonst gibts ein Problem mit der DB! #ERROR: Muss wieder hinzugefügt werden für die alte DB!
 
     # Absolute filesystem path to the directory that will hold user-uploaded files.
     # Example: "/var/www/example.com/media/"
@@ -184,9 +184,10 @@ class Common(Configuration):
         'django.contrib.admindocs',
 
         'crispy_forms',
-        'autofixture',
+        #'autofixture',
         'import_export',
         'wkhtmltopdf',
+        'extra_views',
 
         'absys.apps.abrechnung.apps.AbrechnungConfig',
         'absys.apps.anmeldung.apps.AnmeldungConfig',
