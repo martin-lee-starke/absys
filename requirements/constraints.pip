@@ -2,3 +2,6 @@
 
 #Django==1.10.4  # rq.filter: <1.11
 #factory_boy==2.8.1  # https://github.com/pytest-dev/pytest-factoryboy/issues/47
+django-debug-toolbar==2.2.1
+django-extensions==2.0.0
+django-extra-views==0.13.0

@@ -1,6 +1,7 @@
 python3:
-  pkg.installed:
+  pkg.latest:
     - pkgs:
-      - python3.5-dev: 3.5.2*
-      - python3-pip: 8.1.1*
-      - python3.5-venv: 3.5.2*
+      - python3.8-dev
+      - python3-pip
+      - python3.8-venv
+
