@@ -1,0 +1,21 @@
+// Die launch.json muss in VS Code geladen werden um das Debugging zu Activieren
+// Bevor das Debugging beginnen kann, muss zwinkend in der Shell "make shell" ausgeführt werden!!!!!
+-----------------------------------------------------------------------------------------------------------
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Django",
+            "type": "python",
+            "request": "launch",
+            "program": "~/pyvenv/bin/manage.py",
+            "args": [
+                "runserver",
+                "0.0.0.0:8000"
+            ],
+            "django": true,
+            "justMyCode": false
+        }
+    ]
+}
+---------------------------------------------------------------------------------------------------------------
