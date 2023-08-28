@@ -1,25 +1,25 @@
 general-pkgs:
-  pkg.installed:
+  pkg.latest:
     - pkgs:
-      - build-essential: 12*
-      - gettext: 0.19.7*
+      - build-essential
+      - gettext
 
 postgresql-pkgs:
-  pkg.installed:
+  pkg.latest:
     - pkgs:
-      - libpq-dev: 9.5.*
+      - libpq-dev
 
 lxml-pkgs:
-  pkg.installed:
+  pkg.latest:
     - pkgs:
-      - libxslt1-dev: 1.1.28*
+      - libxslt1-dev
 
 pillow-pkgs:
-  pkg.installed:
+  pkg.latest:
     - pkgs:
-      - libtiff5-dev: 4.0.6*
-      - libjpeg-dev: 8c*
-      - zlib1g-dev: 1:1.2.8*
-      - libfreetype6-dev: 2.6.1*
-      - liblcms2-dev: 2.6*
-      - libwebp-dev: 0.4.4*
+      - libtiff5-dev
+      - libjpeg-dev
+      - zlib1g-dev
+      - libfreetype6-dev
+      - liblcms2-dev
+      - libwebp-dev

@@ -12,8 +12,7 @@ Vagrant.configure(2) do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
   #config.vm.box = "boxcutter/ubuntu1604"
-  config.vm.box = "ubuntu/xenial64"
-  config.vm.box_version = "20201210.0.0"
+  config.vm.box = "bento/ubuntu-20.04"
 
   config.vm.define "dev", primary: true do |dev|
     config.ssh.forward_agent = true
@@ -28,15 +27,15 @@ Vagrant.configure(2) do |config|
       auto_correct: true
   end
 
-  config.vm.define "deployment", autostart: false do |deployment|
-    config.vm.hostname = "absys-deployment"
+  #config.vm.define "deployment", autostart: false do |deployment|
+    #config.vm.hostname = "absys-deployment"
 
     # Port forwarding for Apache server.
-    config.vm.network "forwarded_port", guest: 443, host: 8080,
-      auto_correct: true
-    config.vm.network "forwarded_port", guest: 80, host: 8081,
-      auto_correct: true
-  end
+    #config.vm.network "forwarded_port", guest: 443, host: 8080,
+      #auto_correct: true
+    #config.vm.network "forwarded_port", guest: 80, host: 8081,
+      #auto_correct: true
+  #end
 
   # Salt provisioning.
   config.vm.synced_folder "salt/roots/", "/srv/"
