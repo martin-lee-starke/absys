@@ -63,7 +63,7 @@ class SaxMBSResponse(HttpResponse):
             return output.getvalue().encode('iso-8859-1', errors='replace')
 
     def render_to_string(self, template, context):
-        return self.engine.from_string(template).render(Context(context))
+        return self.engine.from_string(template).render(context) #Bugfix SAX MBS File 
     def zeile_rechnung_einrichtung(self, rechnung_einrichtung, counter, extra_context=None, template=None):
         context = {
             'rechnungeinrichtung': rechnung_einrichtung,
