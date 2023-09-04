@@ -18,7 +18,7 @@
       </tr>
     </thead>
     <tbody>
-      {% for rechnung in object_list %}
+      {% for rechnung in object_list|dictsortreversed:"nummer" %}
         <tr>
           <td>{{ rechnung.startdatum|date:"SHORT_DATE_FORMAT" }}</td>
           <td>{{ rechnung.enddatum|date:"SHORT_DATE_FORMAT" }}</td>
