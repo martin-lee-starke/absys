@@ -218,6 +218,7 @@ class Common(Configuration):
     LOGIN_URL = 'absys_login'
     LOGOUT_URL = 'absys_logout'
     LOGIN_REDIRECT_URL = 'dashboard_dashboard'
+    LOGOUT_REDIRECT_URL = 'absys_login' #redirect beim Ausloggen (Bugfix)
 
     # Custom locale formats
     FORMAT_MODULE_PATH = [
