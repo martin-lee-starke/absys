@@ -12,9 +12,16 @@ Vagrant.configure(2) do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
   #config.vm.box = "boxcutter/ubuntu1604"
-  config.vm.box = "bento/ubuntu-20.04"
+  #config.vm.box = "bento/ubuntu-20.04"
+  config.vm.provider :docker do |d|
+    d.build_dir = "."
+    d.remains_running = true
+    d.privileged = true
+    d.has_ssh = true
+    d.create_args = ["--cgroupns=host"]
+  end
 
-  config.vm.define "dev", primary: true do |dev|
+  config.vm.define "devD", primary: true do |dev|
     config.ssh.forward_agent = true
     config.vm.hostname = "absys-dev"
 
@@ -43,5 +50,7 @@ Vagrant.configure(2) do |config|
     salt.masterless = true
     salt.minion_config = "salt/minion"
     salt.run_highstate = true
+    salt.version = "3005"
+    salt.install_type = "stable"
   end
 end
