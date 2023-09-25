@@ -17,3 +17,4 @@ base:
     - nodejs
   '*-deployment':
     - apache
+    - pipupdate

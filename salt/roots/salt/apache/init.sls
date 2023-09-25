@@ -1,27 +1,43 @@
 apache2:
-  pkg.installed:
-    - version: 2.4.18*
+  pkg.latest:
+    - pkgs:
+      - apache2
   service.running:
     - enable: True
     - watch:
       - file: /etc/apache2/conf-available/wsgi.conf
       - file: /etc/apache2/sites-available/000-default.conf
 
+#enable-ssl-module:
+  #apache_module.enable:
+    #- name: ssl
+    #- require:
+      #- pkg: apache2
+
+#enable-headers-module:
+  #apache_module.enable:
+    #- name: headers
+    #- require:
+      #- pkg: apache2
+
 enable-ssl-module:
-  apache_module.enable:
-    - name: ssl
+  cmd.run:
+    - unless: stat /etc/apache2/mods-enabled/ssl.load
+    - name: a2enmod ssl
     - require:
       - pkg: apache2
 
 enable-headers-module:
-  apache_module.enable:
-    - name: headers
+  cmd.run:
+    - unless: stat /etc/apache2/mods-enabled/headers.load
+    - name: a2enmod headers
     - require:
       - pkg: apache2
 
 libapache2-mod-wsgi-py3:
-  pkg.installed:
-    - version: 4.3.0*
+  pkg.latest:
+    - pkgs:
+      - libapache2-mod-wsgi-py3
     - require:
       - pkg: apache2
 

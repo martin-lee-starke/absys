@@ -12,7 +12,7 @@ Servern nötig:
 2. Die folgenden Dateien in die entsprechenden Pfade kopieren:
 
     - ``000-default.conf`` (Beispiel: ``/etc/apache2/sites-available/000-default.conf``)
-    - ``pg_hba.conf`` (Beispiel: ``/etc/postgresql/9.5/main/pg_hba.conf``)
+    - ``pg_hba.conf`` (Beispiel: ``/etc/postgresql/12/main/pg_hba.conf``)
     - ``wsgi.conf`` (Beispiel: ``/etc/apache2/conf-available/wsgi.conf``)
 
 3. Jede der im vorherigen Schritt genannten Datei enthält Kommentare, die

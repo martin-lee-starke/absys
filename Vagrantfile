@@ -34,15 +34,15 @@ Vagrant.configure(2) do |config|
       auto_correct: true
   end
 
-  #config.vm.define "deployment", autostart: false do |deployment|
-    #config.vm.hostname = "absys-deployment"
+  config.vm.define "deploymentD", autostart: false do |deployment|
+    config.vm.hostname = "absys-deployment"
 
     # Port forwarding for Apache server.
-    #config.vm.network "forwarded_port", guest: 443, host: 8080,
-      #auto_correct: true
-    #config.vm.network "forwarded_port", guest: 80, host: 8081,
-      #auto_correct: true
-  #end
+    config.vm.network "forwarded_port", guest: 443, host: 8080,
+      auto_correct: true
+    config.vm.network "forwarded_port", guest: 80, host: 8081,
+      auto_correct: true
+  end
 
   # Salt provisioning.
   config.vm.synced_folder "salt/roots/", "/srv/"

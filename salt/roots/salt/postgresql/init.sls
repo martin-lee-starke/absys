@@ -7,7 +7,7 @@ postgresql:
     - watch:
         - file: /etc/postgresql/12/main/pg_hba.conf
 
-/etc/postgresql/9.5/main/pg_hba.conf:
+/etc/postgresql/12/main/pg_hba.conf:
   file.managed:
     - user: postgres
     - group: postgres
