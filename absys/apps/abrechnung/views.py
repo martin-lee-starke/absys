@@ -169,7 +169,7 @@ class AbrechnungPDFView(LoginRequiredMixin, MultiplePermissionsRequiredMixin, Ba
     raise_exception = True
 
     pdf_stylesheets = [
-        settings.STATIC_ROOT + '/css/main.css',
+        settings.STATIC_ROOT + '/css/main.css', #TODO: ggf. Pfad ändern
     ]
 
     @property
