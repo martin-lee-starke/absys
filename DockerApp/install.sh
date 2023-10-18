@@ -81,7 +81,7 @@ echo "${STATIC_ROOT}" |  tee /var/envdir/absys/DJANGO_STATIC_ROOT
 # Liste der Hostnamen und Domains, die diese Website ausliefern soll. Hier die
 # IP Adresse und/oder den Domainnamen mit Kommata getrennt eintragen.
 # Bei fehlerhafter Konfiguration ist "Bad Request (400)" im Browser zu sehen.
-echo '127.0.0.1,localhost,172.17.0.6' |  tee /var/envdir/absys/DJANGO_ALLOWED_HOSTS
+echo '127.0.0.1,localhost,172.19.0.5' |  tee /var/envdir/absys/DJANGO_ALLOWED_HOSTS
 
 # Sessionlänge in Sekunden. Nach Ablauf wird der user "ausgeloggt".
 # echo "7200" |  tee /var/envdir/absys/DJANGO_SESSION_COOKIE_AGE

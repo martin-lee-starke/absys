@@ -77,4 +77,7 @@ RUN chmod u+x /home/vagrant/run.sh
 #install.sh Starten
 RUN /home/vagrant/install.sh
 
-EXPOSE 8080
+#USER vagrant
+EXPOSE 443
+
+CMD /home/vagrant/run.sh; /bin/bash

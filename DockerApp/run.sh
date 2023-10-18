@@ -31,3 +31,5 @@ echo "Danach kann man sich mit dem Superuser anmelden und weitere Benutzer erste
 echo "Außerdem sollte der Domainname der importierten Website im Admin (Verwaltung) angepasst werden."
 echo
 echo "###############################################################################################"
+
+envdir /var/envdir/absys manage.py loaddata sites
