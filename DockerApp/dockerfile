@@ -47,8 +47,8 @@ RUN a2enmod ssl
 RUN useradd --create-home -s /bin/bash vagrant
 
 #venv anlegen
-USER vagrant
-RUN python3 -m venv ~/pyvenv
+#USER vagrant
+#RUN python3 -m venv ~/pyvenv
 
 USER root
 #Ordner anlegen
@@ -80,4 +80,5 @@ RUN /home/vagrant/install.sh
 #USER vagrant
 EXPOSE 443
 
-CMD /home/vagrant/run.sh; /bin/bash
+#um den Server zu starten; um den Container am Laufen zu halten
+CMD /home/vagrant/run.sh; /bin/bash 
