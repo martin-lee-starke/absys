@@ -21,7 +21,7 @@ class Common(Configuration):
 
     SECRET_KEY = '(_j4e0=pbe(b+b1$^ch_48be0=gszglcgfzz^dy=(gnx=@m*b7'
 
-    DEBUG = values.BooleanValue(False)
+    DEBUG = values.BooleanValue(True)
 
     ADMINS = AdminsValue()
     MANAGERS = ADMINS
@@ -50,7 +50,7 @@ class Common(Configuration):
                 'level': 'ERROR',
                 'filters': ['require_debug_false'],
                 'class': 'django.utils.log.AdminEmailHandler'
-            }
+            },
         },
         'loggers': {
             'django': {
@@ -76,7 +76,7 @@ class Common(Configuration):
         }
     }
 
-    ALLOWED_HOSTS = values.ListValue(['www.example.com'])
+    ALLOWED_HOSTS = values.ListValue(['127.0.0.1'])
 
     # Invalidate session after 120 minutes
     SESSION_COOKIE_AGE = values.IntegerValue(7200)

@@ -5,3 +5,4 @@
 django-debug-toolbar==2.2.1
 django-extensions==2.0.0
 django-extra-views==0.13.0
+WeasyPrint==51
