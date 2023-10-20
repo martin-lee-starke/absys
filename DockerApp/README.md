@@ -31,6 +31,13 @@ docker build -t absys:1.5 .
 docker tag absys:1.5 absys:latest
 ```
 
+um das Docker Image ohne Reposetory zu portieren muss es in eine .tar Datei gewandelt werden
+
+```bash
+#wandelt das image in eine .tar -> die dann gezippt wird
+docker save absys:1.5.2 | gzip > absys152.tar.gz
+```
+
 ## Docker Container starten
 
 - Wenn der Container gestartet wird sollte er im selben Netz sein wie die in `install.sh` definierte Datenbank!
@@ -40,6 +47,6 @@ docker tag absys:1.5 absys:latest
 ### Beispiel für das starten eines Absys Containers über die CLI:
 ```bash
 #Container im Netzwerk AbsysNetwork mit dem "interactive" Flag
-docker run --network=AbsysNetwork -it absys
+docker run -it --env DJANGO_ALLOWED_HOSTS=172.19.0.5 --env DEFAULT_DATABASE_URL=postgres://absys:absys@875128a60a85/absys --network=AbsysNetwork absys:1.5.2 
 ```
 
