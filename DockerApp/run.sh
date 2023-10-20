@@ -1,3 +1,14 @@
+# Liste der Hostnamen und Domains, die diese Website ausliefern soll. Hier die
+# IP Adresse und/oder den Domainnamen mit Kommata getrennt eintragen.
+# Bei fehlerhafter Konfiguration ist "Bad Request (400)" im Browser zu sehen.
+echo "${DJANGO_ALLOWED_HOSTS}" |  tee /var/envdir/absys/DJANGO_ALLOWED_HOSTS
+
+# Konfiguration der Datenbank-Verbindung, siehe pg_hba.conf.
+# Schema: postgres://BENUTZER:PASSWORT@localhost/DATENBANKNAME
+# PASSWORT UNBEDINGT ÄNDERN!
+# postgres://absys:absys@localhost/absys
+echo "${DEFAULT_DATABASE_URL}" |  tee /var/envdir/absys/DEFAULT_DATABASE_URL
+
 # Deployment Check, Datenbank Migration und Sammeln der statischen Dateien.
  envdir /var/envdir/absys manage.py check --deploy
  envdir /var/envdir/absys manage.py migrate
