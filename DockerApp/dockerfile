@@ -83,5 +83,6 @@ EXPOSE 443
 
 ENV DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost,172.19.0.5
 ENV DEFAULT_DATABASE_URL=postgres://absys:absys@localhost/absys
+
 #um den Server zu starten; um den Container am Laufen zu halten
-CMD /home/vagrant/run.sh; /bin/bash 
+CMD /home/vagrant/run.sh; apache2ctl  -D FOREGROUND

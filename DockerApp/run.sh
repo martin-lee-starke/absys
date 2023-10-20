@@ -11,7 +11,7 @@ echo "${DEFAULT_DATABASE_URL}" |  tee /var/envdir/absys/DEFAULT_DATABASE_URL
 
 # Deployment Check, Datenbank Migration und Sammeln der statischen Dateien.
  envdir /var/envdir/absys manage.py check --deploy
- envdir /var/envdir/absys manage.py migrate
+# envdir /var/envdir/absys manage.py migrate
  envdir /var/envdir/absys manage.py collectstatic --noinput
  /etc/init.d/apache2 restart
 
@@ -44,3 +44,5 @@ echo
 echo "###############################################################################################"
 
 envdir /var/envdir/absys manage.py loaddata sites
+
+etc/init.d/apache2 stop
