@@ -3,7 +3,7 @@ include:
 
 pyvenv:
   cmd.run:
-    - name: python3 -m venv {{ pillar['project']['home'] }}/pyvenv
+    - name: python3.6 -m venv {{ pillar['project']['home'] }}/pyvenv
     - runas: {{ pillar['project']['user'] }}
     - require:
       - sls: python3

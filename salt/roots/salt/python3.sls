@@ -1,7 +1,11 @@
 python3:
-  pkg.latest:
+  cmd.run:
+    - name: sudo add-apt-repository ppa:deadsnakes/ppa && sudo apt-get update
+    - runas: {{ pillar['project']['user'] }}
+  pkg.installed:
     - pkgs:
-      - python3.8-dev
+      - python3.6
+      - python3.6-dev
       - python3-pip
-      - python3.8-venv
+      - python3.6-venv
 
