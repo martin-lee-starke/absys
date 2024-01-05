@@ -21,7 +21,7 @@ class Common(Configuration):
 
     SECRET_KEY = '(_j4e0=pbe(b+b1$^ch_48be0=gszglcgfzz^dy=(gnx=@m*b7'
 
-    DEBUG = values.BooleanValue(True)
+    DEBUG = True
 
     ADMINS = AdminsValue()
     MANAGERS = ADMINS
