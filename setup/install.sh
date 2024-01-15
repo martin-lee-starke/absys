@@ -37,7 +37,8 @@ echo 'Staging' | sudo tee /var/envdir/absys/DJANGO_CONFIGURATION
 # Konfiguration der Datenbank-Verbindung, siehe pg_hba.conf.
 # Schema: postgres://BENUTZER:PASSWORT@localhost/DATENBANKNAME
 # PASSWORT UNBEDINGT ÄNDERN!
-echo 'postgres://absys:absys@localhost/absys' | sudo tee /var/envdir/absys/DEFAULT_DATABASE_URL
+echo 'postgres://absys:absys@875128a60a85/absys' | sudo tee /var/envdir/absys/DEFAULT_DATABASE_URL
+#echo 'postgres://absys:absys@localhost/absys' | sudo tee /var/envdir/absys/DEFAULT_DATABASE_URL
 
 # Dauer in Sekunden, die die Datenbankverbindung aufrecht gehalten wird.
 echo '600' | sudo tee /var/envdir/absys/DEFAULT_CONN_MAX_AGE
@@ -77,7 +78,7 @@ echo "${HOME}/static_root" | sudo tee /var/envdir/absys/DJANGO_STATIC_ROOT
 # Liste der Hostnamen und Domains, die diese Website ausliefern soll. Hier die
 # IP Adresse und/oder den Domainnamen mit Kommata getrennt eintragen.
 # Bei fehlerhafter Konfiguration ist "Bad Request (400)" im Browser zu sehen.
-echo '127.0.0.1,localhost' | sudo tee /var/envdir/absys/DJANGO_ALLOWED_HOSTS
+echo '127.0.0.1,172.17.0.3,localhost' | sudo tee /var/envdir/absys/DJANGO_ALLOWED_HOSTS
 
 # Sessionlänge in Sekunden. Nach Ablauf wird der user "ausgeloggt".
 # echo "7200" | sudo tee /var/envdir/absys/DJANGO_SESSION_COOKIE_AGE
