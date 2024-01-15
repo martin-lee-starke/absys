@@ -2,6 +2,8 @@ apache2:
   pkg.latest:
     - pkgs:
       - apache2
+    - require:
+      - sls: switchPython
   service.running:
     - enable: True
     - watch:
@@ -37,7 +39,9 @@ enable-headers-module:
 libapache2-mod-wsgi-py3:
   pkg.latest:
     - pkgs:
+      - apache2-dev
       - libapache2-mod-wsgi-py3
+      - mc
     - require:
       - pkg: apache2
 

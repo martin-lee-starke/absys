@@ -18,3 +18,4 @@ base:
   '*-deployment':
     - apache
     - pipupdate
+    - switchPython
