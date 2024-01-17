@@ -9,7 +9,7 @@ from django.views.generic import DeleteView, FormView
 from django.views.generic.detail import BaseDetailView, DetailView
 from django.views.generic.list import MultipleObjectMixin
 from dateutil import parser
-from extra_views import FormSetView, InlineFormSet, UpdateWithInlinesView
+from extra_views import FormSetView, InlineFormSetFactory, UpdateWithInlinesView
 
 from django_weasyprint import WeasyTemplateResponseMixin
 
@@ -185,7 +185,7 @@ class AbrechnungPDFView(LoginRequiredMixin, MultiplePermissionsRequiredMixin, Ba
         )
 
 
-class RechnungEinrichtungInline(InlineFormSet):
+class RechnungEinrichtungInline(InlineFormSetFactory):
 
     model = models.RechnungEinrichtung
     fields = ('id', 'buchungskennzeichen', 'datum_faellig')
