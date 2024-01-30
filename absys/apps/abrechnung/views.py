@@ -190,7 +190,7 @@ class RechnungEinrichtungInline(InlineFormSetFactory):
     model = models.RechnungEinrichtung
     fields = ('id', 'buchungskennzeichen', 'datum_faellig')
     can_delete = False
-    extra = 0
+    factory_kwargs = {'extra': 0}
 
 
 class RechnungSozialamtUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateWithInlinesView):
@@ -201,6 +201,7 @@ class RechnungSozialamtUpdateView(LoginRequiredMixin, PermissionRequiredMixin, U
     success_url = reverse_lazy('abrechnung_rechnungsozialamt_form')
     permission_required = 'abrechnung.change_rechnungsozialamt'
     raise_exception = True
+    #factory_kwargs = {'extra': 0}
 
     @property
     def helper_sozialamt(self):
