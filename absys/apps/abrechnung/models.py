@@ -12,6 +12,7 @@ from model_utils import Choices
 from django.utils.functional import cached_property
 from model_utils.models import TimeStampedModel
 
+
 from absys.apps.einrichtungen.models import Einrichtung
 from absys.apps.schueler.models import Schueler, Sozialamt
 
@@ -357,7 +358,12 @@ class RechnungEinrichtung(TimeStampedModel):
 
     @property
     def nummer(self):
-        return "ER{:06d}".format(self.pk)
+        pri = self.pk
+        if self.pk != "":
+            return "ER"
+        else:
+            return "ER{:06d}".format(self.pk)
+        #return "ER"
 
     def abrechnen(self, schueler, eintritt, tage, tage_abwesend, bargeldbetrag, bekleidungsgeld=None, neu_abgerechnete_fehltage=None):
         """Erstellt für den Schüler eine Rechnungsposition.
