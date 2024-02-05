@@ -18,7 +18,7 @@ class Buchungskennzeichen(TimeStampedModel):
         help_text="Bitte das Buchungskennzeichen ohne Trennpunkte eingeben.")
     verfuegbar = models.BooleanField("ist verfügbar", default=True, editable=False)
 
-    objects = managers.BuchungskennzeichenManager()
+    objects = managers.BuchungskennzeichenManager() #definiert wie die Models aus der Datenbank geholt werden 
 
     class Meta:
         ordering = ['-created']
