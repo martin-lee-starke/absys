@@ -1,0 +1,16 @@
+FROM ubuntu:22.04
+
+ENV TZ=Europe/Berlin
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN apt-get update -y
+
+RUN  apt-get install curl -y
+RUN  apt-get install gpg -y
+
+RUN sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt jammy-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+RUN curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
+RUN apt update -y
+
+RUN apt install postgresql-client-16 -y
+RUN export PGPASSWORD="absys"
