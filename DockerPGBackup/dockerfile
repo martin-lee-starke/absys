@@ -5,12 +5,30 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN apt-get update -y
 
+# Add PostgreSQL repository
 RUN  apt-get install curl -y
 RUN  apt-get install gpg -y
-
 RUN sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt jammy-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 RUN curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
 RUN apt update -y
 
+# Install PostgreSQL 16
 RUN apt install postgresql-client-16 -y
-RUN export PGPASSWORD="absys"
+
+# Install CRON
+RUN apt-get install cron -y
+
+RUN mkdir /pg-backup-dir
+RUN mkdir /pg-backup-scrips
+RUN mkdir /pg-backup-log
+
+WORKDIR /pg-backup-scrips
+ADD pg_backup.sh .
+RUN chmod 750 pg_backup.sh
+ADD entrypoint.sh .
+RUN chmod 750 entrypoint.sh
+
+ENV DATABASE_URL=postgres://absys:absys@bsys-master-db-1/absys
+
+RUN echo "0 1 * * 1-5 root /pg-backup-scrips/pg_backup.sh" >> /etc/crontab
+CMD cron
