@@ -37,7 +37,7 @@ echo 'Staging' | sudo tee /var/envdir/absys/DJANGO_CONFIGURATION
 # Konfiguration der Datenbank-Verbindung, siehe pg_hba.conf.
 # Schema: postgres://BENUTZER:PASSWORT@localhost/DATENBANKNAME
 # PASSWORT UNBEDINGT ÄNDERN!
-echo 'postgres://absys:absys@localhost/absys' | sudo tee /var/envdir/absys/DEFAULT_DATABASE_URL
+echo 'postgres://absys:absys@875128a60a85/absys2' | sudo tee /var/envdir/absys/DEFAULT_DATABASE_URL
 
 # Dauer in Sekunden, die die Datenbankverbindung aufrecht gehalten wird.
 echo '600' | sudo tee /var/envdir/absys/DEFAULT_CONN_MAX_AGE
