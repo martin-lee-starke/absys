@@ -189,8 +189,7 @@ class RechnungEinrichtungInline(InlineFormSetFactory):
 
     model = models.RechnungEinrichtung
     fields = ('id', 'buchungskennzeichen', 'datum_faellig')
-    can_delete = False
-    factory_kwargs = {'extra': 0}
+    factory_kwargs = {'extra': 0,'can_delete': False }
 
 
 class RechnungSozialamtUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateWithInlinesView):
@@ -200,8 +199,7 @@ class RechnungSozialamtUpdateView(LoginRequiredMixin, PermissionRequiredMixin, U
     inlines = [RechnungEinrichtungInline]
     success_url = reverse_lazy('abrechnung_rechnungsozialamt_form')
     permission_required = 'abrechnung.change_rechnungsozialamt'
-    raise_exception = True
-    #factory_kwargs = {'extra': 0}
+    factory_kwargs = {'raise_exception': True}
 
     @property
     def helper_sozialamt(self):
@@ -210,6 +208,15 @@ class RechnungSozialamtUpdateView(LoginRequiredMixin, PermissionRequiredMixin, U
     @property
     def helper_einrichtung(self):
         return forms.RechnungEinrichtungUpdateFormHelper()
+    
+    #Debugging für BKZ Edit Fehler (gibt den auftretenden Fehler in Konsole aus)
+    def forms_invalid(self, form, inlines):
+        for formset in inlines:
+            for errors in formset.errors:
+                for _, error in errors.items():
+                    print(error[0])
+        return self.render_to_response(
+            self.get_context_data(request=self.request, form=form, inlines=inlines))
 
 
 class RechnungSozialamtDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):

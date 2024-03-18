@@ -27,6 +27,8 @@ class RechnungSozialamt(TimeStampedModel):
     - Sozialamt Anschrift
     - Startdatum
     - Enddatum
+    
+    ~M: Fasst die Rechnungen für die Kinder von Ganztagsbetreuung und Hp. Kita in Zeitraum zusammen
     """
 
     sozialamt = models.ForeignKey(Sozialamt, models.SET_NULL, null=True, verbose_name="Sozialamt",

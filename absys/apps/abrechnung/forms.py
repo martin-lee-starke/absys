@@ -96,6 +96,7 @@ class RechnungSozialamtUpdateFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.form_tag = False
+        self.render_hidden_fields = True #sicherheitshalber falls es wie Unten nicht geht
         self.layout = Layout(
             Div(
                 Div(
@@ -116,6 +117,7 @@ class RechnungEinrichtungUpdateFormHelper(FormHelper):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.form_tag = False
+        self.render_hidden_fields = True #Fix für "Update des BKZ geht nicht" -> weil die ID (also die Hidden Fiels) nicht an die Crispy Form durchgereicht werden und django die inline form dann nichtmehr zuordnen kann.
         self.layout = Layout(
             Div(
                 Div(
