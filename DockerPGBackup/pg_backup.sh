@@ -84,14 +84,14 @@ log_info "Starting backup of Postgres to file ${BACKUPFILENAME}"
 
 cd $BACKUP_DIR
 
-# DATABASE_URL Bsp.: postgres://absys:absys@localhost/absys
+DATABASE_URL=postgres://absys:absys@absys-master-db-1/absys
 
-pg_dump $DATABASE_URL > $BACKUPFILENAME 2>> | log_info
+pg_dump $DATABASE_URL > $BACKUPFILENAME 2>> $LOGFILE
 if [ $? -ne 0 -o ${PIPESTATUS[0]} -ne 0 ]; then
     log_error "Backup failed."
     exit 1
 else
-    log_info Backup complete. >> $logfile
+    log_info "Backup complete."
 fi
 
 # Check if a param is set to a valid value

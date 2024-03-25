@@ -1,1 +1,1 @@
-* * * * * /pg-backup-scrips/pg_backup.sh
+* * * * * /pg-backup-scrips/pg_backup.sh > /proc/1/fd/1 2>/proc/1/fd/2
