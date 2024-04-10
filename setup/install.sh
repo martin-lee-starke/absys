@@ -37,7 +37,7 @@ echo 'Staging' | sudo tee /var/envdir/absys/DJANGO_CONFIGURATION
 # Konfiguration der Datenbank-Verbindung, siehe pg_hba.conf.
 # Schema: postgres://BENUTZER:PASSWORT@localhost/DATENBANKNAME
 # PASSWORT UNBEDINGT ÄNDERN!
-echo 'postgres://absys:absys@localhost/absys' | sudo tee /var/envdir/absys/DEFAULT_DATABASE_URL
+echo 'postgres://absys:absys@875128a60a85/absys2' | sudo tee /var/envdir/absys/DEFAULT_DATABASE_URL
 
 # Dauer in Sekunden, die die Datenbankverbindung aufrecht gehalten wird.
 echo '600' | sudo tee /var/envdir/absys/DEFAULT_CONN_MAX_AGE
@@ -156,7 +156,7 @@ ${VENV_PATH}/bin/python -m pip install ${PIP_DEFAULT_OPTIONS} --force-reinstall 
 sudo ${VENV_PATH}/bin/envdir /var/envdir/absys ${VENV_PATH}/bin/manage.py check --deploy
 sudo ${VENV_PATH}/bin/envdir /var/envdir/absys ${VENV_PATH}/bin/manage.py migrate
 sudo ${VENV_PATH}/bin/envdir /var/envdir/absys ${VENV_PATH}/bin/manage.py collectstatic --noinput
-sudo systemctl reload apache2.service
+sudo /etc/init.d/apache2 restart
 
 # Täglichen cron job für Benachrichtigungen anlegen
 echo -e "#! /bin/sh\n${VENV_PATH}/bin/envdir /var/envdir/absys $VENV_PATH/bin/manage.py benachrichtige" | sudo tee /etc/cron.daily/absys_benachrichtigungen

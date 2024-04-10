@@ -73,3 +73,8 @@ docs/_build
 
 # Database Dumps
 *.json
+*.dump
+
+# Docker images
+*.tar
+*.tar.gz

@@ -20,7 +20,7 @@ requires = [
     'arrow',
     'Django==2.2.*',
     'dj-database-url',
-    'django-autofixture',
+    #'django-autofixture',
     'django-braces',
     'django-configurations',
     'django-crispy-forms',

@@ -12,6 +12,7 @@ from model_utils import Choices
 from django.utils.functional import cached_property
 from model_utils.models import TimeStampedModel
 
+
 from absys.apps.einrichtungen.models import Einrichtung
 from absys.apps.schueler.models import Schueler, Sozialamt
 
@@ -26,6 +27,8 @@ class RechnungSozialamt(TimeStampedModel):
     - Sozialamt Anschrift
     - Startdatum
     - Enddatum
+    
+    ~M: Fasst die Rechnungen für die Kinder von Ganztagsbetreuung und Hp. Kita in Zeitraum zusammen
     """
 
     sozialamt = models.ForeignKey(Sozialamt, models.SET_NULL, null=True, verbose_name="Sozialamt",
@@ -329,7 +332,7 @@ class RechnungEinrichtung(TimeStampedModel):
     einrichtung = models.ForeignKey(Einrichtung, models.SET_NULL, null=True,
         verbose_name="Einrichtung", related_name='rechnungen')
     name_einrichtung = models.CharField("Name der Einrichtung", max_length=30)
-    buchungskennzeichen = models.CharField("Buchungskennzeichen", max_length=12)
+    buchungskennzeichen = models.CharField("Buchungskennzeichen", max_length=12) #TODO:Buchungskennzeichen!
     datum_faellig = models.DateField("Fälligkeitsdatum")
     betreuungstage = models.PositiveIntegerField(default=0)
     summe = models.DecimalField("Gesamtbetrag", max_digits=8, decimal_places=2, null=True)
@@ -357,7 +360,12 @@ class RechnungEinrichtung(TimeStampedModel):
 
     @property
     def nummer(self):
-        return "ER{:06d}".format(self.pk)
+        pri = self.pk
+        if self.pk != "":
+            return "ER"
+        else:
+            return "ER{:06d}".format(self.pk)
+        #return "ER"
 
     def abrechnen(self, schueler, eintritt, tage, tage_abwesend, bargeldbetrag, bekleidungsgeld=None, neu_abgerechnete_fehltage=None):
         """Erstellt für den Schüler eine Rechnungsposition.

@@ -1,12 +1,13 @@
 postgresql:
-  pkg.installed:
-    - version: 9.5*
+  pkg.latest:
+    - pkgs:
+      - postgresql
   service.running:
     - enable: True
     - watch:
-        - file: /etc/postgresql/9.5/main/pg_hba.conf
+        - file: /etc/postgresql/12/main/pg_hba.conf
 
-/etc/postgresql/9.5/main/pg_hba.conf:
+/etc/postgresql/12/main/pg_hba.conf:
   file.managed:
     - user: postgres
     - group: postgres

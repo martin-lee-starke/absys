@@ -132,6 +132,15 @@ modelgraph:
 runserver:
 	envdir envs/$(ENV) python3 manage.py runserver 0.0.0.0:$(PORT)
 
+startdb:
+	sudo /etc/init.d/postgresql start
+
+stopdb:
+	sudo /etc/init.d/postgresql stop
+
+restartdb:
+	sudo /etc/init.d/postgresql restart
+
 serve-docs:
 	cd docs/$(BUILDDIR)/html; python3 -m http.server $(PORT)
 
@@ -177,3 +186,5 @@ fixtures:
 	envdir envs/$(ENV) python3 manage.py createsuperuser --email ada@example.com
 
 reset-db: drop-db create-db migrate
+
+
