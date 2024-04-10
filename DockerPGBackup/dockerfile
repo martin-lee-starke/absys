@@ -19,20 +19,24 @@ RUN apt install postgresql-client-16 -y
 RUN apt-get install cron -y
 
 # Crontab file copied to cron.d directory.
-ADD cronjob /etc/cron.d/container_cronjob
+COPY cronjob /etc/cron.d/container_cronjob
 
 RUN mkdir /pg-backup-dir
 RUN mkdir /pg-backup-scrips
+RUN mkdir /pg-backup-scrips/host
 RUN mkdir /pg-backup-log
 
 WORKDIR /pg-backup-scrips
-ADD pg_backup.sh .
-RUN chmod +x pg_backup.sh
+COPY pg_backup2_example.sh .
+COPY README.md .
+RUN chmod +x pg_backup2_example.sh
+RUN chmod 0744 pg_backup2_example.sh
 
-ENV DATABASE_URL=postgres://absys:absys@bsys-master-db-1/absys
+ENV DATABASE_URL=postgres://absys:absys@absys-db/absys
 
 # Giving permission to crontab file
 RUN chmod 0644 /etc/cron.d/container_cronjob
+
 # Running crontab
 RUN crontab /etc/cron.d/container_cronjob
 

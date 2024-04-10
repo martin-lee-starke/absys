@@ -105,7 +105,7 @@ echo "${STATIC_ROOT}" |  tee /var/envdir/absys/DJANGO_STATIC_ROOT
 
 # Ob das Buchungskennzeichen des Sozialamtes der Sozialamtsrechnung für alle ihre
 # Einrichtungsrechnungen verwendet werden soll.
-# echo 'False' |  tee /var/envdir/absys/DJANGO_ABSYS_NUTZE_SOZIALAMTS_BUCHUNGSKENNZEICHEN
+ echo 'True' |  tee /var/envdir/absys/DJANGO_ABSYS_NUTZE_SOZIALAMTS_BUCHUNGSKENNZEICHEN
 
 
 # Konfiguration der automatierten 'Hintergrundprüfungen'/Benachrichtigungen.

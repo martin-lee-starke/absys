@@ -1,0 +1,859 @@
+    1  sudo reboot
+    2  groups
+    3  sudo usermod -aG docker martin
+    4  logout
+    5  sudo apt-get update
+    6  sudo apt-get install     ca-certificates     curl     gnupg
+    7  sudo install -m 0755 -d /etc/apt/keyrings
+    8  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    9  sudo chmod a+r /etc/apt/keyrings/docker.gpg
+   10  echo   "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+   11    "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" |   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+   12  sudo apt-get update
+   13  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+   14  sudo docker run hello-world
+   15  sudo usermod -aG docker ${USER}
+   16  su - ${USER}
+   17  wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+   18  echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+   19  sudo apt update && sudo apt install vagrant
+   20  cd absys/
+   21  vagrant up
+   22  vagrant destroy
+   23  vagrant up
+   24  vagrant destroy
+   25  vagrant up
+   26  vagrant destroy
+   27  docker build -t test .
+   28  ls
+   29  docker build -t test .
+   30  cd ..
+   31  docker build -t test .
+   32  docker run -d test
+   33  docker build -t test .
+   34  docker run -d test
+   35  docker build -t test .
+   36  docker run test
+   37  docker run -d test
+   38  docker build -t test .
+   39  docker run test
+   40  docker run -d test
+   41  sudo apt-get install virtualbox virtualbox-qt virtualbox-dkms 
+   42  rebbot
+   43  reboot
+   44  vagrant up
+   45  vagrant destroy -f
+   46  vagrant up
+   47  sudo salt-cloud -u
+   48  vagrant ssh
+   49  vagrant destroy -f
+   50  vagrant up
+   51  vagrant ssh
+   52  vagrant port
+   53  vagrant destroy -f
+   54  vagrant ssh
+   55  vagrant up
+   56  vagrant port
+   57  vagrant ssh
+   58  ls -a
+   59  mkdir 2
+   60  cd 2
+   61  git clone ssh://git@h2516835.stratoserver.net:2050/srv/git/absys.git
+   62  git clone https://github.com/ninjaduck-solutions/absys.git
+   63  cd absys/
+   64  git checkout develop
+   65  vagrant up
+   66  cd 
+   67  cd ..
+   68  cd Downloads
+   69  cd /usr/
+   70  cd ..
+   71  cd /home/
+   72  cd martin/
+   73  cd Downloads
+   74  chmod u+x Obsidian-1.3.5.AppImage
+   75  ./Obsidian-1.3.5.AppImage
+   76  sudo wget https://linux-clients.seafile.com/seafile.asc -O /usr/share/keyrings/seafile-keyring.asc
+   77  reboot
+   78  sudo reboot
+   79  cd home
+   80  cd /home
+   81  cd /home/
+   82  cd ..
+   83  ls
+   84  cd /home/
+   85  ls
+   86  cd martin/
+   87  cd Downloads
+   88  mv Obsidian-1.3.5.AppImage obsidian
+   89  sudo mkdir /usr/bin/obsidian
+   90  sudo cp obsidian /usr/bin/obsidian/obsidian
+   91  nano ~/.profile
+   92  sudo add-apt-repository ppa:appimagelauncher-team/stable
+   93  sudo apt install appimagelauncher
+   94  sudo apt install -y seafile-gui
+   95  vagrant up
+   96  vagrant ssh
+   97  vagrant port
+   98  vagrant ssh
+   99  vagrant up dev
+  100  vagrant destroy 
+  101  vagrant up dev
+  102  vagrant ssh
+  103  vagrant ssh dev
+  104  vagrant ssh absys-dev
+  105  vagrant ssh dev
+  106  vagrant destroy 
+  107  vagrant up
+  108  vagrant ssh
+  109  vagrant provision
+  110  vagrant ssh
+  111  vagrant provision
+  112  vagrant ssh
+  113  git config --global user.email "martin.starke@bechtle.com"
+  114  vagrant up
+  115  vagrant ssh
+  116  vagrant destroy 
+  117  vagrant up
+  118  vagrant ssh
+  119  vagrant destroy 
+  120  vagrant up
+  121  vagrant ssh
+  122  vagrant destroy 
+  123  vagrant up
+  124  vagrant ssh
+  125  vagrant destroy 
+  126  vagrant up --debug &> vagrant.log
+  127  '/home/martin/Downloads/absys-master/setup.py'
+  128  sudo /home/martin/Downloads/absys-master/setup.py
+  129  sudo python3 /home/martin/Downloads/absys-master/setup.py
+  130  vagrant up
+  131  vagrant ssh
+  132  vagrant destroy 
+  133  vagrant up dev
+  134  vagrant ssh
+  135  vagrant ssh dev
+  136  vagrant destroy 
+  137  vagrant up
+  138  vagrant ssh
+  139  vagrant up --debug &> vagrant.log
+  140  vagrant up
+  141  vagrant ssh
+  142  vagrant destroy
+  143  vagrant up
+  144  vagrant destroy
+  145  vagrant up
+  146  vagrant destroy
+  147  vagrant up
+  148  vagrant destroy
+  149  vagrant up
+  150  vagrant destroy
+  151  vagrant up
+  152  vagrant ssh
+  153  vagrant destroy
+  154  vagrant up
+  155  vagrant ssh
+  156  vagrant destroy
+  157  vagrant up
+  158  vagrant ssh
+  159  vagrant destroy
+  160  vagrant up
+  161  vagrant ssh
+  162  exit
+  163  vagrant destroy
+  164  vagrant up
+  165  vagrant ssh
+  166  vagrant up
+  167  vagrant ssh
+  168  vagrant destroy
+  169  vagrant up
+  170  vagrant ssh
+  171  vagrant destroy
+  172  vagrant up
+  173  vagrant ssh
+  174  vagrant destroy
+  175  vagrant up
+  176  vagrant ssh
+  177  vagrant destroy
+  178  vagrant up
+  179  vagrant ssh
+  180  vagrant destroy
+  181  vagrant up
+  182  vagrant ssh
+  183  vagrant port
+  184  vagrant ssh
+  185  vagrant destroy
+  186  vagrant up
+  187  vagrant ssh
+  188  sudo systemctl restart postgresql.service
+  189  apt list --installed
+  190  vagrant ssh
+  191  vagrant destroy
+  192  vagrant up
+  193  vagrant destroy
+  194  vagrant up
+  195  vagrant ssh
+  196  vagrant destroy
+  197  vagrant up
+  198  vagrant ssh
+  199  vagrant ssh-config
+  200  vagrant ssh
+  201  vagrant destroy
+  202  vagrant up
+  203  vagrant ssh-config
+  204  vagrant ssh
+  205  history
+  206  vagrant ssh
+  207  vagrant stop
+  208  vagrant up
+  209  vagrant destroy 
+  210  vagrant up
+  211  vagrant ssh
+  212  vagrant destroy 
+  213  vagrant up
+  214  vagrant ssh
+  215  sudo curl https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo apt-key add
+  216  sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list'
+  217  cat /etc/apt/sources.list.d/pgadmin4.list
+  218  sudo apt update
+  219  sudo apt install pgadmin4
+  220  sudo apt install pgadmin4-desktop
+  221  telnet 127.0.0.1 5432
+  222  telnet localhost 5432
+  223  docker --version
+  224  docker ls
+  225  docker --help
+  226  docker ps
+  227  docker ps -a
+  228  vagrant up --provider=docker
+  229  vagrant up --provider=docker --provision
+  230  sudo usermod -aG docker martin
+  231  vagrant up --provider=docker --provision
+  232  vagrant destroy 
+  233  vagrant up
+  234  vagrant up --provider=docker
+  235  vagrant up --provider=docker --provision
+  236  vagrant destroy
+  237  vagrant up --provider=docker --provision
+  238  vagrant destroy
+  239  vagrant up --provider=docker --provision
+  240  vagrant destroy
+  241  vagrant up --provider=docker --provision
+  242  vagrant destroy
+  243  vagrant up --provider=docker --provision
+  244  vagrant destroy
+  245  vagrant up --provider=docker --provision
+  246  vagrant destroy
+  247  vagrant up --provider=docker --provision
+  248  vagrant destroy
+  249  vagrant up --provider=docker --provision
+  250  vagrant destroy
+  251  vagrant up --provider=docker --provision
+  252  vagrant destroy
+  253  vagrant up --provider=docker --provision
+  254  vagrant destroy
+  255  vagrant up --provider=docker --provision
+  256  vagrant destroy
+  257  vagrant up --provider=docker --provision
+  258  vagrant ssh devD
+  259  vagrant destroy
+  260  vagrant up --provider=docker --provision
+  261  sudo service docker stop
+  262  vagrant destroy
+  263  vagrant up --provider=docker --provision
+  264  vagrant destroy
+  265  vagrant up --provider=docker --provision
+  266  vagrant up --provider=docker --provision --privileged
+  267  sudo service docker stop
+  268  sudo /etc/init.d/docker start
+  269  vagrant destroy
+  270  vagrant up --provider=docker --provision
+  271  vagrant destroy
+  272  vagrant up --provider=docker --provision
+  273  vagrant destroy
+  274  vagrant up --provider=docker --provision
+  275  vagrant destroy
+  276  vagrant up --provider=docker --provision
+  277  vagrant destroy
+  278  vagrant up --provider=docker --provision
+  279  vagrant destroy
+  280  vagrant up --provider=docker --provision
+  281  vagrant destroy
+  282  vagrant up --provider=docker --provision
+  283  vagrant destroy
+  284  vagrant up --provider=docker --provision
+  285  sudo dockerd
+  286  sudo service docker stop
+  287  sudo dockerd
+  288  sudo service docker start
+  289  vagrant up --provider=docker --provision
+  290  sudo service docker start
+  291  sudo /etc/init.d/docker start
+  292  vagrant up --provider=docker --provision
+  293  docker --version
+  294  docker start 
+  295  sudo systemctl start docker
+  296  sudo dockerd
+  297  vagrant up --provider=docker --provision
+  298  telnet 127.0.0.1 5432
+  299  telnet localhost 5432
+  300  vagrant destroy 
+  301  vagrant up
+  302  vagrant ssh
+  303  vagrant provision
+  304  vagrant ssh
+  305  vagrant destroy 
+  306  vagrant up
+  307  vagrant ssh
+  308  vagrant dev ssh
+  309  vagrant ssh dev
+  310  vagrant destroy 
+  311  vagrant up
+  312  vagrant ssh
+  313  vagrant destroy 
+  314  vagrant up
+  315  vagrant ssh
+  316  vagrant destroy 
+  317  vagrant up
+  318  vagrant ssh
+  319  vagrant destroy 
+  320  vagrant up
+  321  --allow-unrelated-histories
+  322  vagrant ssh
+  323  vagrant port
+  324  vagrant ssh
+  325  vagrant destroy 
+  326  vagrant up
+  327  vagrant ssh
+  328  vagrant destroy 
+  329  vagrant up
+  330  vagrant ssh
+  331  vagrant up --provider=docker --provision
+  332  vagrant destroy devD
+  333  vagrant up --provider=docker --provision
+  334  vagrant ssh devD
+  335  vagrant destroy devD
+  336  vagrant up --provider=docker --provision
+  337  vagrant ssh devD
+  338  dpkg --list | grep -i icaclient
+  339  sudo apt install -f ./icaclient_Icaclient._amd64.deb
+  340  sudo apt install -f ./icaclient_Icaclient_amd64.deb
+  341  sudo apt install -f ./icaclient_Icaclient._amd64.deb
+  342  vagrant up deploymentD --provider=docker --provision
+  343  vagrant ssh deploymentD
+  344  vagrant ssh devD
+  345  vagrant ssh deploymentD
+  346  vagrant destroy 
+  347  vagrant up deploymentD --provider=docker --provision
+  348  vagrant ssh deploymentD
+  349  vagrant up deploymentD --provider=docker --provision
+  350  vagrant ssh deploymentD
+  351  vagrant up deploymentD --provider=docker --provision
+  352  vagrant ssh deploymentD
+  353  vagrant up deploymentD --provider=docker --provision
+  354  vagrant ssh deploymentD
+  355  vagrant up deploymentD --provider=docker --provision
+  356  vagrant ssh deploymentD
+  357  vagrant ssh deploymentD
+  358  vagrant destroy Developm
+  359  vagrant ssh deploymentD
+  360  vagrant up deploymentD --provider=docker --provision
+  361  vagrant ssh deployment
+  362  vagrant ssh deploymentD
+  363  vagrant destroy deploymentD
+  364  vagrant up deploymentD --provider=docker --provision
+  365  vagrant ssh deploymentD
+  366  vagrant destroy deploymentD
+  367  vagrant up deploymentD --provider=docker --provision
+  368  vagrant ssh deploymentD
+  369  vagrant destroy deploymentD
+  370  vagrant up deploymentD --provider=docker --provision
+  371  vagrant ssh deploymentD
+  372  vagrant up deploymentD --provider=docker --provision
+  373  vagrant destroy deploymentD
+  374  vagrant up deploymentD --provider=docker --provision
+  375  service apache2 restart
+  376  vagrant ssh deploymentD
+  377  history
+  378  vagrant destroy deploymentD
+  379  vagrant up deploymentD --provider=docker --provision
+  380  source pyvenv/bin/activate
+  381  cd
+  382  vagrant ssh deploymentD
+  383  vagrant destroy deploymentD
+  384  vagrant up deploymentD --provider=docker --provision
+  385  vagrant global-status
+  386  vagrant destroy 06aed31
+  387  vagrant up deploymentD --provider=docker --provision
+  388  vagrant up deployD --provider=docker --provision
+  389  vagrant ssh deplomantD
+  390  vagrant ssh deplomentD
+  391  vagrant ssh deploymentD
+  392  ifconfig
+  393  sudo apt install net-tools
+  394  ifconfig
+  395  ping 10.18.36.2
+  396  ifconfig
+  397  vagrant up deploymantD --provider=docker --provision
+  398  vagrant up deploymentD --provider=docker --provision
+  399  vagrant ssh deploymentD
+  400  docker pull postgres
+  401  docker compose up
+  402  cd
+  403  cd /home/martin/Downloads/absys-master/
+  404  docker compose up
+  405  docker network create AbsysNetwork
+  406  docker network connect AbsysNetwork postgres
+  407  docker network connect AbsysNetwork 875128a60a853595e0cbed6a275253711122e9b82669ba6bee93c70c4f1dacbf
+  408  docker network connect AbsysNetwork 342e4c70023503b169dc1a8b0ae7effe944df6e26879d9b10bab2e4ab6677f2e
+  409  docker exec -ti 875128a60a853595e0cbed6a275253711122e9b82669ba6bee93c70c4f1dacb ping 342e4c70023503b169dc1a8b0ae7effe944df6e26879d9b10bab2e4ab6677f2e
+  410  vagrant ssh deploymentD
+  411  vagrant ssh devD
+  412  vagrant ssh deploymentD
+  413  vagrant ssh devD
+  414  vagrant ssh deploymentD
+  415  docker network connect AbsysNetwork 64fbe3414e113b01e72010448d136467fc9251b20e4bae99c87d0835e904e577
+  416  vagrant up dev
+  417  vagrant ssh
+  418  vagrant ssh dev
+  419  vagrant ssh
+  420  vagrant ssh --provider=virtualbox
+  421  vagrant ssh 342e4c70023503b169dc1a8b0ae7effe944df6e26879d9b10bab2e4ab6677f2e
+  422  vagrant ssh
+  423  vagrant destroy -f deploymentd
+  424  vagrant up deploymentD --provider=docker --provision
+  425  vagrant destroy -f deploymentD
+  426  vagrant up deploymentD --provider=docker --provision
+  427  vagrant ssh deploymentD
+  428  vagrant up deploymentD --provider=docker --provision
+  429  vagrant ssh deploymentD
+  430  vagrant ssh deploymentD
+  431  docker network connect AbsysNetwork ee3515b9fefc9503d3df8f7c81a303664a9519ff6974111a03af09f3c007a6a2
+  432  telnet 127.0.0.1:8080
+  433  cd DockerApp/
+  434  docker build .
+  435  docker build . -t AbSys
+  436  docker build . -t absys
+  437  docker run absys
+  438  docker run -it absys /bin/bash
+  439  docker run absys
+  440  docker build . -t absys
+  441  docker run -it absys /bin/bash
+  442  docker build . -t absys
+  443  docker run -it absys /bin/bash
+  444  docker build . -t absys
+  445  docker run -it absys /bin/bash
+  446  docker build . -t absys
+  447  docker run -it absys /bin/bash
+  448  docker build . -t absys
+  449  docker run -it absys /bin/bash
+  450  docker build . -t absys
+  451  exit
+  452  vagrant ssh deploymentD
+  453  vagrant ssh devD
+  454  docker build . -t absys
+  455  cd DockerApp/
+  456  docker build . -t absys
+  457  docker run -it absys /bin/bash
+  458  docker build . -t absys
+  459  docker run -it absys /bin/bash
+  460  docker build . -t absys
+  461  docker run -it absys /bin/bash
+  462  docker build . -t absys
+  463  docker run -it absys /bin/bash
+  464  docker build . -t absys
+  465  docker run -it absys /bin/bash
+  466  docker build . -t absys
+  467  docker run -it absys /bin/bash
+  468  docker build . -t absys
+  469  docker run -it absys /bin/bash
+  470  docker build . -t absys
+  471  docker run -it absys /bin/bash
+  472  docker build . -t absys
+  473  docker run -it absys /bin/bash
+  474  docker build . -t absys
+  475  docker run -it absys /bin/bash
+  476  docker run -p 9000:8080 -it absys /bin/bash -name absys
+  477  docker run -p 9000:8080 --name absys -it absys /bin/bash
+  478  docker build . -t absys
+  479  docker run -p 127.0.0.1:9000:443 --name absys -it absys /bin/bash
+  480  docker run -p 127.0.0.1:443:9000 --name absys -it absys /bin/bash
+  481  docker run --name absys -it absys /bin/bash
+  482  docker build . -t absys
+  483  docker run --name absys -it absys /bin/bash
+  484  docker build . -t absys
+  485  docker run --name absys -it absys /bin/bash
+  486  docker build . -t absys
+  487  docker run --name absys -it absys /bin/bash
+  488  docker build . -t absys
+  489  docker run --name absys -it absys /bin/bash --network=AbsysNetwork
+  490  docker run --name absys -it absys /bin/bash --network='AbsysNetwork'
+  491  docker run --network=AbsysNetwork --name absys -it absys /bin/bash
+  492  docker build . -t absys
+  493  docker run --network=AbsysNetwork --name absys -it absys /bin/bash
+  494  docker run --network=AbsysNetwork --ip=172.19.0.5 --name absys -it absys /bin/bash
+  495  docker build . -t absys
+  496  docker run --network=AbsysNetwork --ip=172.19.0.5 --name absys -it absys /bin/bash
+  497  docker run --network=AbsysNetwork --name absys -it absys /bin/bash
+  498  docker run --network=AbsysNetwork --name absys -it absys
+  499  docker run --network=AbsysNetwork --name absys -it absys /bin/bash
+  500  docker run --network=AbsysNetwork --name absys -it absys
+  501  docker build . -t absys
+  502  docker run --network=AbsysNetwork --name absys -it absys
+  503  docker build . -t absys
+  504  docker run --network=AbsysNetwork --name absys -it absys
+  505  docker build . -t absys
+  506  docker run --network=AbsysNetwork --name absys -it absys
+  507  docker run --network=AbsysNetwork -it absys
+  508  docker build . -t absys
+  509  docker run --network=AbsysNetwork -it absys
+  510  docker build . -t absys
+  511  docker run --network=AbsysNetwork -it absys
+  512  docker run --network=AbsysNetwork -d
+  513  docker run --network=AbsysNetwork -d absys
+  514  docker run --network=AbsysNetwork -it absys
+  515  docker build -t absys:1.5 .
+  516  docker tag absys:1.5 absys:latest
+  517  docker run --network=AbsysNetwork absys:latest
+  518  docker run --network=AbsysNetwork -it absys:latest
+  519  docker network connect AbsysNetwork 8d24dea094f491ace7e7f36cedc29ace0d855e9b40d5e1fa53296ee
+  520  docker network connect AbsysNetwork absys
+  521  docker network connect AbsysNetwork goofy_haslett
+  522  docker network connect AbsysNetwork hungry_nash
+  523  docker network connect AbsysNetwork absys
+  524  docker save absys:latest | gzip > absys.tar.gz
+  525  vagrant ssh deploymantD
+  526  vagrant ssh deploymentD
+  527  vagrant ssh devD
+  528  docker build -t absys:1.5.1 .
+  529  cd /DockerApp
+  530  ls -a
+  531  cd DockerApp/
+  532  docker build -t absys:1.5.1 .
+  533  docker run --env DJANGO_ALLOWED_HOSTS=172.19.0.3 --network=AbsysNetwork absys:1.5.1 
+  534  docker run -it --env DJANGO_ALLOWED_HOSTS=172.19.0.3 --network=AbsysNetwork absys:1.5.1 
+  535  docker tag absys:1.5.1 absys:latest
+  536  docker save absys:1.5.1 | gzip > absys.tar.gz
+  537  docker build -t absys:1.5.2 .
+  538  docker tag absys:1.5.2 absys:latest
+  539  docker run -it --env DJANGO_ALLOWED_HOSTS=172.19.0.3 --env DEFAULT_DATABASE_URL=postgres://absys:absys@875128a60a85/absys --network=AbsysNetwork absys:1.5.1 
+  540  docker run -it --env DJANGO_ALLOWED_HOSTS=172.19.0.5 --env DEFAULT_DATABASE_URL=postgres://absys:absys@875128a60a85/absys --network=AbsysNetwork absys:1.5.2 
+  541  docker tag absys:1.5.2 absys:latest
+  542  docker save absys:1.5.2 | gzip > absys152.tar.gz
+  543  docker build -t absys:1.5.3 .
+  544  docker run -it --env DJANGO_ALLOWED_HOSTS=172.19.0.5 --env DEFAULT_DATABASE_URL=postgres://absys:absys@875128a60a85/absys --network=AbsysNetwork absys:1.5.3 
+  545  docker build -t absys:1.5.3 .
+  546  docker run -it --env DJANGO_ALLOWED_HOSTS=172.19.0.5 --env DEFAULT_DATABASE_URL=postgres://absys:absys@875128a60a85/absys --network=AbsysNetwork absys:1.5.3 
+  547  docker build -t absys:1.5.4 .
+  548  docker run -it --env DJANGO_ALLOWED_HOSTS=172.19.0.5 --env DEFAULT_DATABASE_URL=postgres://absys:absys@875128a60a85/absys --network=AbsysNetwork absys:1.5.4 
+  549  docker build -t absys:1.5.4 .
+  550  docker run -it --env DJANGO_ALLOWED_HOSTS=172.19.0.5 --env DEFAULT_DATABASE_URL=postgres://absys:absys@875128a60a85/absys --network=AbsysNetwork absys:1.5.4 
+  551  docker build -t absys:1.5.4 .
+  552  docker run -it --env DJANGO_ALLOWED_HOSTS=172.19.0.5 --env DEFAULT_DATABASE_URL=postgres://absys:absys@875128a60a85/absys --network=AbsysNetwork absys:1.5.4 
+  553  docker build -t absys:1.5.4 .
+  554  docker run -it --env DJANGO_ALLOWED_HOSTS=172.19.0.5 --env DEFAULT_DATABASE_URL=postgres://absys:absys@875128a60a85/absys --network=AbsysNetwork absys:1.5.4 
+  555  docker build -t absys:1.5.4 .
+  556  docker run -it --env DJANGO_ALLOWED_HOSTS=172.19.0.5 --env DEFAULT_DATABASE_URL=postgres://absys:absys@875128a60a85/absys --network=AbsysNetwork absys:1.5.4 
+  557  docker build -t absys:1.5.4 .
+  558  docker run -it --env DJANGO_ALLOWED_HOSTS=172.19.0.5 --env DEFAULT_DATABASE_URL=postgres://absys:absys@875128a60a85/absys --network=AbsysNetwork absys:1.5.4 
+  559  docker build -t absys:1.5.5 .
+  560  docker run -it --env DJANGO_ALLOWED_HOSTS=172.19.0.5 --env DEFAULT_DATABASE_URL=postgres://absys:absys@875128a60a85/absys --network=AbsysNetwork absys:1.5.5 
+  561  docker run -it --env DJANGO_ALLOWED_HOSTS=172.19.0.5 --env DEFAULT_DATABASE_URL=postgres://absys:absys@875128a60a85/absys --network=AbsysNetwork absys:1.5.4
+  562  docker tag absys:1.5.4 absys:latest
+  563  docker save absys:1.5.4 | gzip > absys154.tar.gz
+  564  --allow-unrelated-histories
+  565  git merge --allow-unrelated-histories develop-new
+  566  vagrant up devD --provider=docker --provision
+  567  vagrant ssh devD
+  568  vagrant destroy devD
+  569  vagrant up devD --provider=docker --provision
+  570  vagrant ssh devD
+  571  vagrant destroy devD
+  572  vagrant up devD --provider=docker --provision
+  573  vagrant ssh devD
+  574  vagrant destroy devD
+  575  vagrant up devD --provider=docker --provision
+  576  vagrant ssh devD
+  577  vagrant destroy devD
+  578  vagrant up devD --provider=docker --provision
+  579  vagrant ssh devD
+  580  make runserver
+  581  vagrant ssh devD
+  582  docker network connect AbsysNetwork f55123cbe29cedb8010b0a908317dab1bfa1fa91f70986aac96a5179d98f3a62
+  583  docker network join AbsysNetwork f55123cbe29cedb8010b0a908317dab1bfa1fa91f70986aac96a5179d98f3a62
+  584  docker network connect AbsysNetwork f55123cbe29cedb8010b0a908317dab1bfa1fa91f70986aac96a5179d98f3a62
+  585  ping postgres
+  586  telnet 127.0.0.1 5432
+  587  telnet 127.0.0.2 5432
+  588  telnet localhost 5432
+  589  echo /usr/bin/bash
+  590  exit
+  591  vagrant up deploymentD --provider=docker --provision
+  592  vagrant ssh devD
+  593  vagrant ssh deploymentD
+  594  vagrant destroy deploymentD
+  595  vagrant up deploymentD --provider=docker --provision
+  596  vagrant ssh deploymentD
+  597  vagrant destroy deploymentD
+  598  vagrant up deploymentD --provider=docker --provision
+  599  vagrant ssh deploymentD
+  600  vagrant destroy deploymentD
+  601  vagrant up deploymentD --provider=docker --provision
+  602  vagrant ssh deploymentD
+  603  vagrant destroy deploymentD
+  604  vagrant ssh deploymentD
+  605  vagrant up deploymentD --provider=docker --provision
+  606  vagrant ssh deploymentD
+  607  vagrant destroy deploymentD
+  608  vagrant up deploymentD --provider=docker --provision
+  609  vagrant ssh deploymentD
+  610  vagrant destroy deploymentD
+  611  vagrant up deploymentD --provider=docker --provision
+  612  vagrant ssh deploymentD
+  613  vagrant destroy deploymentD
+  614  vagrant up deploymentD --provider=docker --provision
+  615  vagrant ssh deploymentD
+  616  vagrant destroy deploymentD
+  617  vagrant up deploymentD --provider=docker --provision
+  618  vagrant ssh deploymentD
+  619  vagrant destroy deploymentD
+  620  vagrant up deploymentD --provider=docker --provision
+  621  vagrant ssh deploymentD
+  622  vagrant destroy deploymentD
+  623  vagrant up deploymentD --provider=docker --provision
+  624  docker network connect absys-master_default ee3515b9fefc9503d3df8f7c81a303664a9519ff6974111a03af09f3c007a6a2
+  625  docker network connect absys-master_default 5297b55cf88d919b4ddf57ca9d8a03938cbb1e16d4c23192b4a2e40da39dad89
+  626  docker network connect absys-master_default 2a777ec2eeb8886519962a823e4ad9fb242ce2cc7d2217f01224b90c3dcce1ba
+  627  docker network connect absys-master_default b06fe9950a819e7d5d7642496e9d28901219201d8b44d67209a18dab1b28b929
+  628  docker network connect absys-master_default b444e401b421a117050742611dc83c2287abe74d0306481099372c91764f6250
+  629  docker network connect absys-master_default 446e05e6d702992ef6f5494ff1d1a05c1de51813630fedc2f5183b54f888b056
+  630  docker network connect absys-master_default 0a01de0ad7e26beac57e7928b37e3682806cd6fa24066dec237ca81c073e5d83
+  631  docker network connect absys-master_default 887875d1bea9f6053cd90c4969db34022078d8e47fa1ddbae966f2740f89daad
+  632  vagrant ssh devD
+  633  vagrant ssh deploymentD
+  634  docker network connect absys-master_default 89a6b194f4838f401f3b42f4bd04ddab24530f0dd383bfac8355e68dc4e004f0
+  635  docker network connect absys-master_default e0f647de56f359be41826563a47c49a034f5537140edf23ce3b0f2a2fe001eb2
+  636  docker network connect absys-master_default 8b590e7eb34259d059e27a675c9de00caf60e5dbdb9b599c0a864f49955f0ff1
+  637  vagrant destroy deploymentD
+  638  vagrant up deploymentD --provider=docker --provision
+  639  vagrant ssh devD
+  640  vagrant ssh deploymentD
+  641  vagrant destroy deploymentD
+  642  vagrant up deploymentD --provider=docker --provision
+  643  source pyvenv/bin/activate
+  644  vagrant ssh deploymentD
+  645  vagrant destroy deploymentD
+  646  vagrant up deploymentD --provider=docker --provision
+  647  vagrant ssh deploymentD
+  648  pip uninstall pyyaml
+  649  pip remove pyyaml
+  650  vagrant ssh deploymentD
+  651  vagrant destroy deploymentD
+  652  vagrant up deploymentD --provider=docker --provision
+  653  vagrant ssh deploymentD
+  654  echo /usr/bin/bash
+  655  echo /usr/bin/bash
+  656  vagrant ssh devD
+  657  echo /usr/bin/bash
+  658  vagrant ssh devD
+  659  docker build -t absys:1.5.6 .
+  660  cd DockerApp
+  661  docker build -t absys:1.5.6 .
+  662  docker build -t absys:1.5.6 . --progress=plain
+  663  docker run -it --env DJANGO_ALLOWED_HOSTS=172.19.0.5 --env DEFAULT_DATABASE_URL=postgres://absys:absys@875128a60a85/absys --network=AbsysNetwork absys:1.5.6
+  664  docker run -it --env DJANGO_ALLOWED_HOSTS=172.19.0.3 -env DEFAULT_DATABASE_URL=postgres://absys:absys@875128a60a85/absys --network=AbsysNetwork absys:1.5.6
+  665  docker run -it --env DJANGO_ALLOWED_HOSTS=172.19.0.3 --env DEFAULT_DATABASE_URL=postgres://absys:absys@875128a60a85/absys --network=AbsysNetwork absys:1.5.6
+  666  docker network join absys-master_default f7ddce462cb9a2f22178bf9c68c9976a8f4db55e16dac3ea25e739faeb2a1395
+  667  docker network connect absys-master_default f7ddce462cb9a2f22178bf9c68c9976a8f4db55e16dac3ea25e739faeb2a1395
+  668  vagrant ssh devD
+  669  vagrant up devD --provider=docker --provision
+  670  vagrant ssh devD
+  671  vagrant destrop devD
+  672  vagrant destroy devD
+  673  vagrant up devD --provider=docker --provision
+  674  vagrant ssh devD
+  675  vagrant destroy devD
+  676  vagrant up devD --provider=docker --provision
+  677  vagrant ssh devD
+  678  echo /usr/bin/bash
+  679  make develop
+  680  vagrant ssh devD
+  681  vagrant destroy deploymentD
+  682  vagrant destroy devD
+  683  vagrant up devD --provider=docker --provision
+  684  vagrant ssh devD
+  685  vagrant destroy devD
+  686  vagrant up devD --provider=docker --provision
+  687  vagrant ssh devD
+  688  docker network join absys-master_default dc414a850c09a7f56693cdfeced27355c5a5a7f858ceb2a02257169734d14433
+  689  docker network connect absys-master_default dc414a850c09a7f56693cdfeced27355c5a5a7f858ceb2a02257169734d14433
+  690  echo /usr/bin/bash
+  691  vagrant ssh devD
+  692  vagrant destroy devD
+  693  vagrant up devD --provider=docker --provision
+  694  vagrant ssh devD
+  695  killall code
+  696  cd /var/lib/postgresql/data
+  697  vagrant ssh devD
+  698  vagrant destroy devD
+  699  vagrant up devD --provider=docker --provision
+  700  vagrant ssh devD
+  701  docker network connect absys-master_default 940b0bcd04fda27fc057fba53ae2794882d657231c849cc5d74668b8fddf1bcc
+  702  docker network connect absys-master_default 369785616e0386048fbb228592801f1afc40a83d9bbfb8d1669c9c5147ad606c
+  703  docker cp /home/martin/Documents/Wichtige Dateien/DB postgres:/var/lib/postgresql/data/db
+  704  docker cp /home/martin/Documents/Wichtige_Dateien/DB postgres:/var/lib/postgresql/data/db
+  705  docker cp /home/martin/Documents/Wichtige_Dateien/DB 875128a60a853595e0cbed6a275253711122e9b82669ba6bee93c70c4f1dacbf:/var/lib/postgresql/data/db
+  706  docker network connect absys-master_default 7284adf0e63bebb1e6813908786436d42fd3d4d69a7d56b2bd1e1e9ae0690622
+  707  vagrant up deploymentD --provider=docker --provision
+  708  vagrant ssh deploymantD
+  709  vagrant ssh deploymentD
+  710  docker network connect absys-master_default 7284adf0e63bebb1e6813908786436d42fd3d4d69a7d56b2bd1e1e9ae0690622
+  711  docker network connect absys-master_default 70aa18e9fba33f819e1cb3b7d3e44ff68f08501c6c910c8e9c96881957eb5f7a
+  712  cd DockerApp/
+  713  docker build -t absys:1.5.7 .
+  714  docker run -it --env DJANGO_ALLOWED_HOSTS=172.19.0.3 --env DEFAULT_DATABASE_URL=postgres://absys:absys@875128a60a85/absys2 --network=absys-master_default absys:1.5.7
+  715  docker run -it --env DJANGO_ALLOWED_HOSTS=172.19.0.5 --env DEFAULT_DATABASE_URL=postgres://absys:absys@875128a60a85/absys2 --network=absys-master_default absys:1.5.7
+  716  docker run -it --env DJANGO_ALLOWED_HOSTS=172.18.0.5 --env DEFAULT_DATABASE_URL=postgres://absys:absys@875128a60a85/absys2 --network=absys-master_default absys:1.5.7
+  717  docker save absys:1.5.7 | gzip > absys157.tar.gz
+  718  vagrant up deploymentD --provider=docker --provision
+  719  vagrant ssh deploymentD
+  720  source pyvenv/bin/activate
+  721  vagrant ssh deploymentD
+  722  vagrant destroy deploymentD
+  723  vagrant up deploymentD --provider=docker --provision
+  724  source pyvenv/bin/activate
+  725  vagrant ssh deploymentD
+  726  cd DockerPGBackup/
+  727  docker build -t PGBackup:0.1 .
+  728  docker build -t pgbackup:0.1 .
+  729  docker run -it pbbackup:0.1
+  730  docker run -it pgbackup:0.1
+  731  docker start -it funny_heyrovsky
+  732  docker start -t funny_heyrovsky
+  733  docker start funny_heyrovsky
+  734  docker build -t pgbackup:0.2 .
+  735  docker run -it pgbackup:0.2
+  736  docker build -t pgbackup:0.2 .
+  737  docker run -it pgbackup:0.2
+  738  docker build -t pgbackup:0.2 .
+  739  docker run -it pgbackup:0.2
+  740  cd DockerPGBackup/
+  741  docker build -t pgbackup:0.2 .
+  742  docker run -it pgbackup:0.2
+  743  docker build -t pgbackup:0.2 .
+  744  docker run -it pgbackup:0.2
+  745  docker build -t pgbackup:0.2 .
+  746  docker run -it pgbackup:0.2
+  747  docker build -t pgbackup:0.2 .
+  748  docker run -it pgbackup:0.2
+  749  docker build -t pgbackup:0.2 .
+  750  docker run -it pgbackup:0.2
+  751  docker build -t pgbackup:0.2 .
+  752  docker run -it pgbackup:0.2
+  753  docker build -t pgbackup:0.2 .
+  754  docker run -it pgbackup:0.2
+  755  cd DockerPGBackup/
+  756  docker build -t pgbackup:0.2 .
+  757  docker run -it pgbackup:0.2
+  758  docker build -t pgbackup:0.2 .
+  759  docker run -it pgbackup:0.2
+  760  docker run -it pgbackup:0.2 /bin/bash
+  761  docker run -it pgbackup:0.2
+  762  docker build -t pgbackup:0.2 .
+  763  docker run -it pgbackup:0.2 /bin/bash
+  764  docker build -t pgbackup:0.2 .
+  765  docker run -it pgbackup:0.2 /bin/bash
+  766  docker build -t pgbackup:0.2 .
+  767  docker run -it pgbackup:0.2 /bin/bash
+  768  docker build -t pgbackup:0.2 .
+  769  docker run -it pgbackup:0.2 /bin/bash
+  770  docker build -t pgbackup:0.2 .
+  771  docker run -it pgbackup:0.2 /bin/bash
+  772  docker build -t pgbackup:0.2 .
+  773  docker run -it pgbackup:0.2 /bin/bash
+  774  docker build -t pgbackup:0.2 .
+  775  docker run -it pgbackup:0.2 /bin/bash
+  776  docker build -t pgbackup:0.2 .
+  777  docker run -it pgbackup:0.2 /bin/bash
+  778  docker build -t pgbackup:0.2 .
+  779  docker run -it pgbackup:0.2 /bin/bash
+  780  docker build -t pgbackup:0.2 .
+  781  docker run -it pgbackup:0.2 /bin/bash
+  782  docker build -t pgbackup:0.2 .
+  783  docker run -it pgbackup:0.2 /bin/bash
+  784  docker network connect absys-master_default beautiful_lalande
+  785  docker network connect absys-master_default beautiful_ishizaka
+  786  docker network connect absys-master_default elated_moore
+  787  docker network connect absys-master_default funny_heyrovsky
+  788  docker network connect absys-master_default pedantic_dhawan
+  789  docker network connect absys-master_default pedantic_dhawa
+  790  docker network connect absys-master_default sleepy_goldwasser
+  791  docker run ubuntu
+  792  docker run ubuntu -it
+  793  docker run ubuntu -i
+  794  docker run -it ubuntu:latest
+  795  docker run -it ubuntu:22.04
+  796  docker build -t pgbackup:0.3 .
+  797  cd DockerPGBackup/
+  798  docker build -t pgbackup:0.3 .
+  799  docker run -it pgbackup:0.3
+  800  docker run -it pgbackup:0.3 /bin/bash
+  801  docker build -t pgbackup:0.4 .
+  802  docker run -itd pgbackup:0.4
+  803  docker build -t pgbackup:0.4 .
+  804  docker run -itd pgbackup:0.4 -name Test01
+  805  docker run -itd -name Test01 pgbackup:0.4
+  806  docker run -itd -name test pgbackup:0.4
+  807  docker run -itd pgbackup:0.4
+  808  docker run -it pgbackup:0.4 /bin/bash
+  809  docker build -t pgbackup:0.5 .
+  810  docker run -it pgbackup:0.5
+  811  docker run -it pgbackup:0.6
+  812  cd DockerPGBackup/
+  813  docker build -t pgbackup:0.6 .
+  814  docker run -it pgbackup:0.6
+  815  echo /usr/bin/bash
+  816  vagrant up deploymantD
+  817  vagrant ssh deploymentD
+  818  docker run -it --env DJANGO_ALLOWED_HOSTS=172.19.0.3 --env DEFAULT_DATABASE_URL=postgres://absys:absys@875128a60a85/absys --network=AbsysNetwork absys:1.5.7
+  819  docker run -it --env DJANGO_ALLOWED_HOSTS=172.19.0.3 --env DEFAULT_DATABASE_URL=postgres://absys:absys@875128a60a85/absys --network=AbsysNetwork absys:1.5.7
+  820  docker run -it --env DJANGO_ALLOWED_HOSTS=172.19.0.3 --env DEFAULT_DATABASE_URL=postgres://absys:absys@875128a60a85/absys2 --network=AbsysNetwork absys:1.5.7
+  821  vagrant up devD
+  822  sudo lsof -t -i:8000
+  823  sudo netstat -lpn |grep :8080
+  824  sudo netstat -lpn |grep :8000
+  825  kill -p 1049550
+  826  kill -9 1049550
+  827  sudo netstat -lpn |grep :8000
+  828  vagrant ssh devD
+  829  docker network connect absys-master_default 70aa18e9fba33f819e1cb3b7d3e44ff68f08501c6c910c8e9c96881957eb5f7a
+  830  source pyvenv/bin/activate
+  831  vagrant up deploymentD --provider=docker --provision
+  832  vagrant ssh deploymentD
+  833  echo /usr/bin/bash
+  834  git log 
+  835  git log --graph
+  836  killall code
+  837  docker network connect AbsysNetwork absys
+  838  cd DockerApp/
+  839  docker build -t absys:1.5.7 .
+  840  docker run -it --env DJANGO_ALLOWED_HOSTS=172.19.0.3 --env DEFAULT_DATABASE_URL=postgres://absys:absys@875128a60a85/absys --network=AbsysNetwork absys:1.5.7
+  841  docker save absys:1.5.7 | gzip > absys157.tar.gz
+  842  echo /usr/bin/bash
+  843  docker run -it --env DJANGO_ALLOWED_HOSTS=172.19.0.3 --env DEFAULT_DATABASE_URL=postgres://absys:absys@875128a60a85/absys --network=AbsysNetwork absys:1.5.7
+  844  curl --fail --silent --write-out 'HTTP CODE : %{http_code}\n' --output /dev/null http://172.19.0.3:8001/
+  845  curl --fail --silent --write-out 'HTTP CODE : %{http_code}\n' --output /dev/null http://172.19.0.3/
+  846  curl --fail --silent --write-out 'HTTP CODE : %{http_code}\n' --output /dev/null https://172.19.0.3/
+  847  curl --fail --silent --write-out 'HTTP CODE : %{http_code}\n' --output /dev/null https://172.19.0.3/login/?next=/
+  848  curl --fail --silent --write-out 'HTTP CODE : %{http_code}\n' --output /dev/null https://172.19.0.3/login
+  849  curl --fail --silent --write-out 'HTTP CODE : %{http_code}\n' --output /dev/null https://172.19.0.3
+  850  curl -k --fail --silent --write-out 'HTTP CODE : %{http_code}\n' --output /dev/null https://172.19.0.3
+  851  curl -k --fail --silent --write-out 'HTTP CODE : %{http_code}\n' --output /dev/null https://172.19.0.3/login/
+  852  cd DockerApp/
+  853  docker build -t absys:1.5.9 .
+  854  docker run -it pgbackupbackup:0.3
+  855  docker run -it pgbackup:0.3
+  856  docker run -it pgbackup:0:3
+  857  docker run pgbackup:0:3
+  858  docker run pgbackup:0.3
+  859  history >> history.txt
