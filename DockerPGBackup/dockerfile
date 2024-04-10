@@ -23,14 +23,16 @@ COPY cronjob /etc/cron.d/container_cronjob
 
 RUN mkdir /pg-backup-dir
 RUN mkdir /pg-backup-scrips
+RUN mkdir /pg-backup-scrips/host
 RUN mkdir /pg-backup-log
 
 WORKDIR /pg-backup-scrips
-COPY pg_backup.sh .
-RUN chmod +x pg_backup.sh
-RUN chmod 0744 pg_backup.sh
+COPY pg_backup2_example.sh .
+COPY README.md .
+RUN chmod +x pg_backup2_example.sh
+RUN chmod 0744 pg_backup2_example.sh
 
-ENV DATABASE_URL=postgres://absys:absys@absys-master-db-1/absys
+ENV DATABASE_URL=postgres://absys:absys@absys-db/absys
 
 # Giving permission to crontab file
 RUN chmod 0644 /etc/cron.d/container_cronjob
