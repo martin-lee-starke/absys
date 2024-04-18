@@ -1,10 +1,11 @@
 #!/bin/bash
 
 # Database name
-DATABASE_NAME="LFHPROD"
-DATABASE_HOST="absys-db-lfh"
+DATABASE_NAME="absys2"
+DATABASE_RESTORE_NAME="ABSYSTEST"
+DATABASE_HOST="absys-master-db-1"
 
-DATABASE_URL="postgres://absys:absys@${DATABASE_HOST}/${DATABASE_NAME}"
+DATABASE_URL="postgres://absys:absys@${DATABASE_HOST}/${DATABASE_RESTORE_NAME}"
 echo "${DATABASE_URL}"
  
 
@@ -12,10 +13,10 @@ echo "${DATABASE_URL}"
 backupfolder="/pg-backup-dir"
 
 # Number of days to store the backup 
-keep_day=14
+#keep_day=14
 
 #Logfile
-Logfile="/pg-backup-log/${DATABASE_NAME}.log"
+Logfile="/pg-backup-log/${DATABASE_NAME}-Restore.log"
 Loglevel="INFO"
 
 sqlfile=$backupfolder/${DATABASE_NAME}-$(date +%d-%m-%Y).sql
@@ -52,32 +53,31 @@ function log_error {
   fi
 }
 
-# Create a backup
-
-if pg_dump $DATABASE_URL > $sqlfile ; then
-   log_info "Sql dump created"
+# Decompress backup 
+if gzip -d -c $zipfile > $sqlfile; then
+   log_info "The backup was successfully decompressed"
 else
-   log_error "pg_dump return non-zero code, no backup was created!"
+   log_error "Error decompressing backup, Backup was not restored!"
    log_error "------------- ERROR ------------------"
    rm $sqlfile
    exit
 fi
 
-# Compress backup 
-if gzip -c $sqlfile > $zipfile; then
-   log_info "The backup was successfully compressed"
+# Restore Backup
+if psql -d $DATABASE_URL --set ON_ERROR_STOP=on -f $sqlfile; then
+   log_info "Sql dump created"
 else
-   log_error "Error compressing backup, Backup was not created!"
+   log_error "restore ${sqlfile} returned non-zero code, no backup was restored!"
    log_error "------------- ERROR ------------------"
-   rm $zipfile 
+   rm $sqlfile
    exit
 fi
 
 rm $sqlfile 
-log_info "${zipfile} : Backup was successfully created"
+log_info "Backup was successfully restored"
 
 # Delete old backups 
-log_info "Deleting Backups older than $keep_day days."
-find $backupfolder -mtime +$keep_day -delete
+#log_info "Deleting Backups older than $keep_day days."
+#find $backupfolder -mtime +$keep_day -delete
 
 log_info "------------- SUCCESS ------------------"

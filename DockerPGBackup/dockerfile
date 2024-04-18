@@ -28,9 +28,12 @@ RUN mkdir /pg-backup-log
 
 WORKDIR /pg-backup-scrips
 COPY pg_backup2_example.sh .
+COPY pg_restore_example.sh .
 COPY README.md .
 RUN chmod +x pg_backup2_example.sh
+RUN chmod +x pg_restore_example.sh
 RUN chmod 0744 pg_backup2_example.sh
+RUN chmod 0744 pg_restore_example.sh
 
 ENV DATABASE_URL=postgres://absys:absys@absys-db/absys
 
