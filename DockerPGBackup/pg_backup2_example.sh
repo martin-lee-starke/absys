@@ -18,8 +18,8 @@ keep_day=14
 Logfile="/pg-backup-log/${DATABASE_NAME}.log"
 Loglevel="INFO"
 
-sqlfile=$backupfolder/${DATABASE_NAME}-$(date +%d-%m-%Y_%H-%M-%S).sql
-zipfile=$backupfolder/${DATABASE_NAME}-$(date +%d-%m-%Y_%H-%M-%S).gzip
+sqlfile=$backupfolder/${DATABASE_NAME}-$(date +%d-%m-%Y).sql
+zipfile=$backupfolder/${DATABASE_NAME}-$(date +%d-%m-%Y).gz
 
 # --------------------------------------------------------------------
 # Logging functions
