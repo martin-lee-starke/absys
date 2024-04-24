@@ -5,20 +5,23 @@ DATABASE_NAME="absys2"
 DATABASE_RESTORE_NAME="ABSYSTEST"
 DATABASE_HOST="absys-master-db-1"
 
+DATABASE_URL_DELETE="postgres://absys:absys@${DATABASE_HOST}"
 DATABASE_URL="postgres://absys:absys@${DATABASE_HOST}/${DATABASE_RESTORE_NAME}"
 echo "${DATABASE_URL}"
  
 
 # Backup storage directory 
 backupfolder="/pg-backup-dir"
+scriptsfolder="/pg-backup-scrips"
 
 # Number of days to store the backup 
 #keep_day=14
 
 #Logfile
-Logfile="/pg-backup-log/${DATABASE_NAME}-Restore.log"
+Logfile="/pg-backup-log/${DATABASE_RESTORE_NAME}-restore.log"
 Loglevel="INFO"
 
+cleanfile=$scriptsfolder/pgrestore.sql
 sqlfile=$backupfolder/${DATABASE_NAME}-$(date +%d-%m-%Y).sql
 zipfile=$backupfolder/${DATABASE_NAME}-$(date +%d-%m-%Y).gz
 
@@ -55,9 +58,19 @@ function log_error {
 
 # Decompress backup 
 if gzip -d -c $zipfile > $sqlfile; then
-   log_info "The backup was successfully decompressed"
+   log_info "The ${zipfile} was successfully decompressed"
 else
-   log_error "Error decompressing backup, Backup was not restored!"
+   log_error "Error decompressing ${zipfile}, Backup was not restored!"
+   log_error "------------- ERROR ------------------"
+   rm $sqlfile
+   exit
+fi
+
+# Clear Database
+if psql -d $DATABASE_URL_DELETE --set ON_ERROR_STOP=on -f $cleanfile; then
+   log_info "Database ${DATABASE_RESTORE_NAME} cleaned"
+else
+   log_error "${DATABASE_RESTORE_NAME} returned non-zero code, databese not cleaned!"
    log_error "------------- ERROR ------------------"
    rm $sqlfile
    exit
@@ -65,7 +78,7 @@ fi
 
 # Restore Backup
 if psql -d $DATABASE_URL --set ON_ERROR_STOP=on -f $sqlfile; then
-   log_info "Sql dump created"
+   log_info "Database ${DATABASE_NAME} to ${DATABASE_RESTORE_NAME} restored"
 else
    log_error "restore ${sqlfile} returned non-zero code, no backup was restored!"
    log_error "------------- ERROR ------------------"
@@ -76,8 +89,5 @@ fi
 rm $sqlfile 
 log_info "Backup was successfully restored"
 
-# Delete old backups 
-#log_info "Deleting Backups older than $keep_day days."
-#find $backupfolder -mtime +$keep_day -delete
 
 log_info "------------- SUCCESS ------------------"

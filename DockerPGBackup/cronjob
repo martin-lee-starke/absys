@@ -1,1 +1,2 @@
 0 2 * * * /pg-backup-scrips/host/pg_backup2.sh > /proc/1/fd/1 2>/proc/1/fd/2
+10 2 27 * * /pg-backup-scrips/host/pg_restore.sh > /proc/1/fd/1 2>/proc/1/fd/2
