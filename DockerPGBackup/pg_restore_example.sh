@@ -5,7 +5,7 @@ DATABASE_NAME="absys2"
 DATABASE_RESTORE_NAME="ABSYSTEST"
 DATABASE_HOST="absys-master-db-1"
 
-DATABASE_URL_DELETE="postgres://absys:absys@${DATABASE_HOST}"
+DATABASE_URL_CONNECT="postgres://absys:absys@${DATABASE_HOST}/${DATABASE_NAME}"
 DATABASE_URL="postgres://absys:absys@${DATABASE_HOST}/${DATABASE_RESTORE_NAME}"
 echo "${DATABASE_URL}"
  
@@ -67,7 +67,7 @@ else
 fi
 
 # Clear Database
-if psql -d $DATABASE_URL_DELETE --set ON_ERROR_STOP=on -f $cleanfile; then
+if psql -d $DATABASE_URL_CONNECT --set ON_ERROR_STOP=on -f $cleanfile; then
    log_info "Database ${DATABASE_RESTORE_NAME} cleaned"
 else
    log_error "${DATABASE_RESTORE_NAME} returned non-zero code, databese not cleaned!"
