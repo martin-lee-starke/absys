@@ -1,15 +1,20 @@
 # How to Use the Backup Container
 
 ## Introduction
-The pgbackup container is a verry simple container based on Ubuntu 22.04 with Cron and postgresql-client-16 installed. With the postgresql-client-16 it connects via network to the postgres container and runs the backup script with a Cronjob.
+The pgbackup container is a very simple container based on Ubuntu 22.04 with Cron and postgresql-client-16 installed. With the postgresql-client-16 it connects via network to the postgres container and runs the backup script with a Cronjob.
 
 ## Arm the Backup Script
-The backup script that is run by the cronjob have to be located in `/pg-backup-scrips/host`. The cronjob is defined in `/etc/cron.d/container_cronjob`. To allow changes to the backupscript while the Container is running, the directory `/pg-backup-scrips/host` shold be mounted to a host directory. Then you need to place the script `pg_backup2.sh` in the host folder. An example for that code is placed in `/pg-backup-scrips/pg_backup2_example.sh`. Copy this file and adjust the variables.
+The backup script that is run by the cronjob has to be located in `/pg-backup-scrips/host`. The cronjob is defined in `/etc/cron.d/container_cronjob`. To allow changes to the backupscript while the Container is running, the directory `/pg-backup-scrips/host` should be mounted to a host directory. Then you need to place the script `pg_backup2.sh` in the host folder. An example for that code is placed in `/pg-backup-scrips/pg_backup2_example.sh`. Copy this file and adjust the variables.
+
+# Use the Restore Script
+The restore script plays nicely with the existing backup feature. It gets the backup of the current day and restores the test-db with the data from the backup. You can modify the script to alter the restore taget-db. For the restore process, the script has to drop and recreate the test-db, for that there is a `pgrestore.sql` file in the `/pg-backup-scrips` folder. If you change the restore-db name, you need to alter the name there too! 
+
 
 ### Cronjob
-The job runs every Day at 2 AM.
+The job runs every Day at 2 AM and starts the backup and restore scripts.
 ```cron
 0 2 * * * /pg-backup-scrips/host/pg_backup2.sh > /proc/1/fd/1 2>/proc/1/fd/2
+10 2 27 * * /pg-backup-scrips/host/pg_restore.sh > /proc/1/fd/1 2>/proc/1/fd/2
 ```
 
 ### Backup Example
@@ -99,3 +104,5 @@ find $backupfolder -mtime +$keep_day -delete
 log_info "------------- SUCCESS ------------------"
 
 ```
+
+### Restore Example

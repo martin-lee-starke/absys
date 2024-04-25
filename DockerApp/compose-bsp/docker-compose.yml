@@ -1,0 +1,90 @@
+version: '3.6'
+services:
+  absys-app:
+    container_name: 'absys-lfh'
+    image: 'absys:1.5.9'
+    restart: unless-stopped
+    environment:
+      - DJANGO_ALLOWED_HOSTS=lfh.absys.smk.sachsen.de,localhost,127.0.0.1,absys-lfh,abslsh.smk.sachsen.de
+      - DEFAULT_DATABASE_URL=postgres://absys:absys@absys-db-lfh/LFHPROD
+      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      - TZ=Europe/Berlin
+    command:
+      - /bin/sh
+      - -c
+      - /home/vagrant/run.sh; apache2ctl  -D FOREGROUND
+    networks:
+      - proxy-net
+      - absys-intern
+    healthcheck:
+      test: ["CMD-SHELL", "curl -k --fail --silent --write-out 'HTTP CODE : %{http_code}\n' --output /dev/null https://absys-lfh/login/"]
+      interval: 10s
+      timeout: 60s
+      retries: 5
+      start_period: 15s 
+    depends_on:  
+      db:  
+        condition: service_healthy
+  db:
+    container_name: 'absys-db-lfh'
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 9Va0UdaY]TzLSru@
+      PGUSER: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 80s 
+    volumes:
+      - /mnt/DockerDisk/pgdata_lfh:/var/lib/postgresql/data
+    networks:
+      - absys-intern
+
+  dbBackup:
+    container_name: 'pgbackup-lfh'
+    image: pgbackup:1.6
+    restart: always 
+    volumes:
+      - /mnt/DockerDisk/pgbackup/pg-backup-dir:/pg-backup-dir
+      - /mnt/DockerDisk/pgbackup/pg-backup-log:/pg-backup-log
+      - /mnt/DockerDisk/pgbackup/pg-backup-scrips-lfh:/pg-backup-scrips/host
+    networks:
+      - absys-intern
+      
+  absys-app-test:
+    container_name: 'absys-lfh-test'
+    image: 'absys:1.5.9'
+    restart: unless-stopped
+    environment:
+      - DJANGO_ALLOWED_HOSTS=lfh-test.absys.smk.sachsen.de,localhost,127.0.0.1,absys-lfh-test
+      - DEFAULT_DATABASE_URL=postgres://absys:absys@absys-db-lfh/ABSYSTEST
+      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      - TZ=Europe/Berlin
+    command:
+      - /bin/sh
+      - -c
+      - /home/vagrant/run.sh; apache2ctl  -D FOREGROUND
+    networks:
+      - proxy-net
+      - absys-intern
+    healthcheck:
+      test: ["CMD-SHELL", "curl -k --fail --silent --write-out 'HTTP CODE : %{http_code}\n' --output /dev/null https://absys-lfh-test/login/"]
+      interval: 10s
+      timeout: 60s
+      retries: 5
+      start_period: 15s 
+    depends_on:  
+      db:  
+        condition: service_healthy
+networks:
+  proxy-net:
+    name: nginx-proxy-manager_default
+    external: true
+#  absys-Network:
+#    name: absys-Network
+#    external: true
+  absys-intern:
+    internal: true
