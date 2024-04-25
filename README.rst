@@ -13,6 +13,14 @@ Das Urheberrecht für den hier vorliegenden Programmcode liegt bei den Firmen
 Binärpakete) sind lizensiert unter der EUPL V.1.1. Der vollständige Lizenztext
 liegt in der Datei ``LICENSE`` vor.
 
+Anpassungen wurden ab 2023 von Martin Lee Starke von Bechtle Bonn vorgenommen.
+ Änderungen: - Docker integration
+             - Buggfix
+             - Aktualisierung
+
+Anmerkunen von Ihm sind in Dev-Infos-neu.md und Dev-Infos-DB+Backup.md zu finden.
+
+
 Voraussetzungen
 ===============
 
