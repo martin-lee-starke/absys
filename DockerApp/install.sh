@@ -131,7 +131,7 @@ echo "${STATIC_ROOT}" |  tee /var/envdir/absys/DJANGO_STATIC_ROOT
 # SaxMBS Ebene 1 - String, muss acht Stellen haben
 # echo '        ' |  tee /var/envdir/absys/DJANGO_ABSYS_SAX_EBENE_1
 # SaxMBS Kapitel - Integer, darf maximal fünf Stellen haben; OHNE FÜHRENDE NULLEN ANGEBEN!
-# echo '12345' |  tee /var/envdir/absys/DJANGO_ABSYS_SAX_KAPITEL
+echo '555' |  tee /var/envdir/absys/DJANGO_ABSYS_SAX_KAPITEL
 # SaxMBS Mahnschlüssel - Integer, darf maximal zwei Stellen haben
 # echo '10' |  tee /var/envdir/absys/DJANGO_ABSYS_SAX_MAHNSCHLUESSEL
 # SaxMBS SEPA - Integer, muss eine Stelle haben
