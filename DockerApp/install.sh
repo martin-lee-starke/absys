@@ -133,7 +133,7 @@ echo "${STATIC_ROOT}" |  tee /var/envdir/absys/DJANGO_STATIC_ROOT
 # SaxMBS Kapitel - Integer, darf maximal fünf Stellen haben; OHNE FÜHRENDE NULLEN ANGEBEN!
 echo '555' |  tee /var/envdir/absys/DJANGO_ABSYS_SAX_KAPITEL
 # SaxMBS Mahnschlüssel - Integer, darf maximal zwei Stellen haben
-# echo '10' |  tee /var/envdir/absys/DJANGO_ABSYS_SAX_MAHNSCHLUESSEL
+echo '13' |  tee /var/envdir/absys/DJANGO_ABSYS_SAX_MAHNSCHLUESSEL
 # SaxMBS SEPA - Integer, muss eine Stelle haben
 # echo '1' |  tee /var/envdir/absys/DJANGO_ABSYS_SAX_SEPA
 # SaxMBS Währung - String, darf maximal drei Stellen haben
@@ -150,7 +150,7 @@ echo '555' |  tee /var/envdir/absys/DJANGO_ABSYS_SAX_KAPITEL
 # echo '1234' |  tee /var/envdir/absys/DJANGO_LOCKDOWN_PASSWORDS
 
 # Berechtigungen korrigieren
- chgrp -R www-data /var/envdir/absys &&  chmod -R g=rX,o= /var/envdir/absys
+chgrp -R www-data /var/envdir/absys &&  chmod -R g=rX,o= /var/envdir/absys
 
 # Installation/Upgrade AbSys und den abhängigen Paketen. Es werden nur Pakete
 # aus ${PACKAGE_PATH} installiert, es findet kein Download statt.
