@@ -141,7 +141,7 @@ echo '13' |  tee /var/envdir/absys/DJANGO_ABSYS_SAX_MAHNSCHLUESSEL
 # SaxMBS Zahlungsanzeigeschlüssel - Integer, darf maximal zwei Stellen haben
 # echo '10' |  tee /var/envdir/absys/DJANGO_ABSYS_SAX_ZAHLUNGSANZEIGESCHLUESSEL
 # SaxMBS Zinsschlüssel - Integer, muss eine Stelle haben
-# echo '1' |  tee /var/envdir/absys/DJANGO_ABSYS_SAX_ZINSSCHLUESSEL
+echo '0' |  tee /var/envdir/absys/DJANGO_ABSYS_SAX_ZINSSCHLUESSEL
 
 # Lockdown-Schutz aktivieren/deaktivieren
 # echo 'True' |  tee /var/envdir/absys/DJANGO_LOCKDOWN_ENABLED
