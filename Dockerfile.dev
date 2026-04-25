@@ -6,7 +6,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     # Python 3.8 is the default python3 in Ubuntu 20.04
-    python3 python3-dev python3-pip \
+    python3 python3-dev python3-pip python3-venv \
     # Build tools
     build-essential gettext \
     # PostgreSQL client libs
@@ -26,13 +26,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
+# Create a virtualenv matching the Vagrant pyvenv approach.
+# The venv's bundled pip (from ensurepip) is old and lenient; we then upgrade it
+# to >=22.3.1 which gracefully skips non-PEP-440 version strings on PyPI
+# (fix for the strict 22.0-22.2 window that would crash on e.g. setuptools 0.8.0-final0).
+RUN python3 -m venv /venv
+ENV PATH="/venv/bin:$PATH"
+
 # Install Python deps as a cached layer — only invalidated when requirements change.
 # Source code is mounted as a volume at runtime, so changes don't require a rebuild.
 COPY requirements/ requirements/
-COPY setup.py setup.cfg ./
-RUN pip3 install --upgrade pip setuptools wheel \
-    && pip3 install -c requirements/constraints.pip -r requirements/dev.pip \
-    && pip3 install -c requirements/constraints.pip -e .
+COPY setup.py setup.cfg README.rst manage.py ./
+RUN pip install "pip>=22.3.1" \
+    && pip install wheel setuptools \
+    && pip install -c requirements/constraints.pip -r requirements/docker.pip \
+    && pip install -c requirements/constraints.pip -e .
 
 EXPOSE 8000
 

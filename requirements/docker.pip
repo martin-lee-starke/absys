@@ -1,0 +1,14 @@
+# Requirements for the Docker dev container.
+# Subset of dev.pip — excludes local-only tools (glances, thefuck, pg-activity, pdbpp, bumpversion)
+# that have non-PEP-440 version strings on PyPI and don't make sense in a container.
+
+-r ./test.pip
+
+django-debug-toolbar==2.2.1
+django-extensions==2.0.0
+django-template-debug
+envdir
+flake8
+ipython
+isort
+pydotplus

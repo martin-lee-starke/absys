@@ -72,7 +72,8 @@ docs/_build
 # Git
 .gitattributes
 
-# Database Dumps
+# Database Dumps / Backups (never commit production data)
+_db_Backups/
 *.json
 *.dump
 
