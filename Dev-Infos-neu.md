@@ -1,4 +1,58 @@
-# I Anlegen der Dev-Umgebung mit Vagrant
+# Entwicklungsumgebung
+
+## I Docker Compose (aktuell empfohlen)
+
+**Voraussetzungen:** Docker Desktop installiert, kein weiteres Setup nötig.
+
+### Starten
+
+```bash
+docker compose up
+```
+
+Startet App (Port 8000) und PostgreSQL-Datenbank. Beim ersten Start wird das Image gebaut (~5 min).
+
+### Erstmalige Einrichtung der Datenbank
+
+```bash
+docker compose exec app make migrate
+docker compose exec app make fixtures
+```
+
+### Entwicklung
+
+Änderungen an Python-Dateien werden **sofort** wirksam (Volume-Mount, Django Auto-Reload).
+
+Bei Änderungen an `requirements/*.pip` oder `setup.py` muss das Image neu gebaut werden:
+
+```bash
+docker compose build app
+docker compose up
+```
+
+### Nützliche Befehle
+
+```bash
+# Tests ausführen
+docker compose exec app make test
+
+# Django Shell
+docker compose exec app make shell
+
+# Migrationen erstellen
+docker compose exec app make makemigrations
+
+# Logs der App
+docker compose logs -f app
+```
+
+### Umgebungsvariablen
+
+Die Docker-Konfiguration liegt in `envs/docker/`. Anpassungen (z.B. `DJANGO_ALLOWED_HOSTS`) dort vornehmen — keine Änderungen an `envs/dev/` nötig.
+
+---
+
+## II Anlegen der Dev-Umgebung mit Vagrant (deprecated)
 
 ## Voraussetzungen
 - Docker oder VirtualBox als Provider

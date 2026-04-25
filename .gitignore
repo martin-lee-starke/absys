@@ -25,6 +25,7 @@ wheelhouse
 # envdirs
 envs/*
 !envs/dev
+!envs/docker
 
 # Django
 absys/media/*
