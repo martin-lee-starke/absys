@@ -1,4 +1,5 @@
 import datetime
+import decimal
 
 import pytest
 from django.core.exceptions import ValidationError
@@ -111,4 +112,107 @@ class TestRechnungsPositionEinrichtung:
         for rechnung_einrichtung in rechnung_sozialamt.rechnungen_einrichtungen.all():
             assert rechnung_einrichtung.positionen.filter(schueler=schueler).count() == 1
             pos = rechnung_einrichtung.positionen.filter(schueler=schueler).first()
-            assert pos.detailabrechnung.count() == 11
+            assert len(list(pos.detailabrechnung)) == 11
+
+
+@pytest.mark.django_db
+class TestRechnungsPositionEinrichtungCharacterisierung:
+    """Charakterisierungstests für detailabrechnung-abhängige Properties."""
+
+    def test_anwesenheitssumme_summiert_pflegesaetze_anwesender_tage(
+            self, schueler, rechnung_einrichtung_factory,
+            rechnungs_position_einrichtung_factory,
+            rechnungs_position_schueler_factory):
+        """anwesenheitssumme summiert abgerechnete Nicht-Fehltag-Pflegesätze."""
+        re = rechnung_einrichtung_factory()
+        pos = rechnungs_position_einrichtung_factory(
+            schueler=schueler, rechnung_einrichtung=re)
+        rechnungs_position_schueler_factory(
+            schueler=schueler,
+            rechnung_sozialamt=re.rechnung_sozialamt,
+            einrichtung=re.einrichtung,
+            datum=re.rechnung_sozialamt.startdatum,
+            abgerechnet=True, abwesend=False,
+            pflegesatz=decimal.Decimal('50.00'),
+        )
+        rechnungs_position_schueler_factory(
+            schueler=schueler,
+            rechnung_sozialamt=re.rechnung_sozialamt,
+            einrichtung=re.einrichtung,
+            datum=re.rechnung_sozialamt.startdatum + datetime.timedelta(1),
+            abgerechnet=True, abwesend=True,
+            pflegesatz=decimal.Decimal('30.00'),
+        )
+        assert pos.anwesenheitssumme == decimal.Decimal('50.00')
+
+    def test_abwesenheitssumme_summiert_pflegesaetze_abwesender_tage(
+            self, schueler, rechnung_einrichtung_factory,
+            rechnungs_position_einrichtung_factory,
+            rechnungs_position_schueler_factory):
+        """abwesenheitssumme summiert abgerechnete Fehltag-Pflegesätze."""
+        re = rechnung_einrichtung_factory()
+        pos = rechnungs_position_einrichtung_factory(
+            schueler=schueler, rechnung_einrichtung=re)
+        rechnungs_position_schueler_factory(
+            schueler=schueler,
+            rechnung_sozialamt=re.rechnung_sozialamt,
+            einrichtung=re.einrichtung,
+            datum=re.rechnung_sozialamt.startdatum,
+            abgerechnet=True, abwesend=False,
+            pflegesatz=decimal.Decimal('50.00'),
+        )
+        rechnungs_position_schueler_factory(
+            schueler=schueler,
+            rechnung_sozialamt=re.rechnung_sozialamt,
+            einrichtung=re.einrichtung,
+            datum=re.rechnung_sozialamt.startdatum + datetime.timedelta(1),
+            abgerechnet=True, abwesend=True,
+            pflegesatz=decimal.Decimal('30.00'),
+        )
+        assert pos.abwesenheitssumme == decimal.Decimal('30.00')
+
+    def test_anwesenheitssumme_ist_none_wenn_keine_anwesenheiten(
+            self, schueler, rechnung_einrichtung_factory,
+            rechnungs_position_einrichtung_factory,
+            rechnungs_position_schueler_factory):
+        """anwesenheitssumme ist None wenn keine abgerechneten Anwesenheitstage existieren."""
+        re = rechnung_einrichtung_factory()
+        pos = rechnungs_position_einrichtung_factory(
+            schueler=schueler, rechnung_einrichtung=re)
+        rechnungs_position_schueler_factory(
+            schueler=schueler,
+            rechnung_sozialamt=re.rechnung_sozialamt,
+            einrichtung=re.einrichtung,
+            datum=re.rechnung_sozialamt.startdatum,
+            abgerechnet=True, abwesend=True,
+            pflegesatz=decimal.Decimal('30.00'),
+        )
+        assert pos.anwesenheitssumme is None
+
+    def test_fehltage_anderer_zeitraum_zaehlt_positionen_ausserhalb_rechnungszeitraum(
+            self, schueler, rechnung_einrichtung_factory,
+            rechnungs_position_einrichtung_factory,
+            rechnungs_position_schueler_factory):
+        """fehltage_anderer_zeitraum zählt Positionen deren Datum außerhalb des Rechnungszeitraums liegt."""
+        re = rechnung_einrichtung_factory()
+        startdatum = re.rechnung_sozialamt.startdatum
+        enddatum = re.rechnung_sozialamt.enddatum
+        pos = rechnungs_position_einrichtung_factory(
+            schueler=schueler, rechnung_einrichtung=re)
+        # Datum innerhalb des Zeitraums
+        rechnungs_position_schueler_factory(
+            schueler=schueler,
+            rechnung_sozialamt=re.rechnung_sozialamt,
+            einrichtung=re.einrichtung,
+            datum=startdatum,
+            pflegesatz=decimal.Decimal('50.00'),
+        )
+        # Datum außerhalb des Zeitraums (vor startdatum)
+        rechnungs_position_schueler_factory(
+            schueler=schueler,
+            rechnung_sozialamt=re.rechnung_sozialamt,
+            einrichtung=re.einrichtung,
+            datum=startdatum - datetime.timedelta(1),
+            pflegesatz=decimal.Decimal('50.00'),
+        )
+        assert pos.fehltage_anderer_zeitraum == 1

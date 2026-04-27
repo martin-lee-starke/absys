@@ -69,6 +69,19 @@ class TestAbrechnungPDFViewQuerieoptimierung:
         qs = view.get_queryset()
         assert 'rechnungen_einrichtungen__einrichtung__standort' in qs._prefetch_related_lookups
 
+    def test_get_queryset_prefetcht_positionen_schueler_fuer_detailabrechnung(self):
+        """get_queryset() muss positionen_schueler per Prefetch laden, damit detailabrechnung keine N+1-Queries erzeugt."""
+        from django.db.models import Prefetch
+        view = AbrechnungPDFView()
+        qs = view.get_queryset()
+        # Prefetch-Objekte nutzen prefetch_through für den eigentlichen Relationsnamen
+        prefetch_relationen = [
+            lookup.prefetch_through if isinstance(lookup, Prefetch) else lookup
+            for lookup in qs._prefetch_related_lookups
+        ]
+        assert 'positionen_schueler' in prefetch_relationen, \
+            "positionen_schueler muss als Prefetch-Objekt in get_queryset() enthalten sein."
+
 
 class TestAbrechnungPDFTemplatesQuerieoptimierung:
     """Stellt sicher, dass Templates keine doppelten Queryset-Auswertungen verursachen."""

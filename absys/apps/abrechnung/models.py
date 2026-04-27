@@ -597,11 +597,22 @@ class RechnungsPositionEinrichtung(TimeStampedModel):
     def detailabrechnung(self):
         """
         Gibt alle :model:`abrechnung.RechnungsPositionSchueler`-Instanzen zurück, die zu dieser Instanz gehören.
+
+        Nutzt den Prefetch-Cache (_positionen_schueler_cache) auf RechnungSozialamt, falls vorhanden,
+        um N+1-Queries im PDF-View zu vermeiden.
         """
-        return self.schueler.positionen_schueler.filter(
-            rechnung_sozialamt=self.rechnung_einrichtung.rechnung_sozialamt,
+        rechnung_sozialamt = self.rechnung_einrichtung.rechnung_sozialamt
+        einrichtung_id = self.rechnung_einrichtung.einrichtung_id
+        schueler_id = self.schueler_id
+        if hasattr(rechnung_sozialamt, '_positionen_schueler_cache'):
+            return [
+                p for p in rechnung_sozialamt._positionen_schueler_cache
+                if p.einrichtung_id == einrichtung_id and p.schueler_id == schueler_id
+            ]
+        return list(self.schueler.positionen_schueler.filter(
+            rechnung_sozialamt=rechnung_sozialamt,
             einrichtung=self.rechnung_einrichtung.einrichtung
-        )
+        ))
 
     @cached_property
     def fehltage_anderer_zeitraum(self):
@@ -609,22 +620,27 @@ class RechnungsPositionEinrichtung(TimeStampedModel):
         Gibt die Anzahl der in dieser EinrichtungsPosition abgerechneten Fehltage zurück,
         die nicht in den Zeitraum der Rechnung fallen.
         """
-        return self.detailabrechnung.exclude(
-            datum__range=(
-                self.rechnung_einrichtung.rechnung_sozialamt.startdatum,
-                self.rechnung_einrichtung.rechnung_sozialamt.enddatum)
-        ).count()
+        startdatum = self.rechnung_einrichtung.rechnung_sozialamt.startdatum
+        enddatum = self.rechnung_einrichtung.rechnung_sozialamt.enddatum
+        return sum(
+            1 for p in self.detailabrechnung
+            if not (startdatum <= p.datum <= enddatum)
+        )
 
     @cached_property
     def anwesenheitssumme(self):
         """Betrag Anwesenheit."""
-        return self.detailabrechnung.filter(
-            abgerechnet=True, abwesend=False
-        ).aggregate(models.Sum('pflegesatz'))['pflegesatz__sum']
+        werte = [
+            p.pflegesatz for p in self.detailabrechnung
+            if p.abgerechnet and not p.abwesend
+        ]
+        return sum(werte, decimal.Decimal('0')) if werte else None
 
     @cached_property
     def abwesenheitssumme(self):
         """Betrag Abwesenheit."""
-        return self.detailabrechnung.filter(
-            abgerechnet=True, abwesend=True
-        ).aggregate(models.Sum('pflegesatz'))['pflegesatz__sum']
+        werte = [
+            p.pflegesatz for p in self.detailabrechnung
+            if p.abgerechnet and p.abwesend
+        ]
+        return sum(werte, decimal.Decimal('0')) if werte else None

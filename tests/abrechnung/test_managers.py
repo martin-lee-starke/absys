@@ -115,7 +115,7 @@ class TestRechnungSozialamtManager:
             )
             assert pos_einrichtung.fehltage_abrechnung == 1
             assert pos_einrichtung.zahltage == 5
-            assert pos_einrichtung.detailabrechnung.count() == 5
+            assert len(list(pos_einrichtung.detailabrechnung)) == 5
 
     @pytest.mark.slowtest
     def test_get_startdatum(self, sozialamt):
