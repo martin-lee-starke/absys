@@ -65,13 +65,13 @@ RUN echo 'absys.config.settings.public' > /var/envdir/absys/DJANGO_SETTINGS_MODU
 COPY DockerApp/run.sh /home/vagrant/run.sh
 RUN chmod u+x /home/vagrant/run.sh
 
-# AbSYS aus Quellcode installieren (keine Wheelhouse mehr nötig)
+# AbSYS aus Quellcode installieren — constraints.pip fixiert kritische Versionen (u.a. WeasyPrint==51)
 COPY . /build/
-RUN pip3 install /build/ && rm -rf /build/
+RUN pip3 install /build/ -c /build/requirements/constraints.pip && rm -rf /build/
 
 EXPOSE 443
 
 ENV DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost
 ENV DEFAULT_DATABASE_URL=postgres://absys:absys@localhost/absys
 
-CMD ["/bin/sh", "-c", "/home/vagrant/run.sh; apache2ctl -D FOREGROUND"]
+CMD ["/bin/sh", "-c", "/home/vagrant/run.sh; apache2ctl stop 2>/dev/null; apache2ctl -D FOREGROUND"]
