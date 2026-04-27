@@ -161,7 +161,6 @@ class ErfassungBekleidungsgeldFormView(LoginRequiredMixin, MessageMixin, FormSet
 class AbrechnungPDFView(LoginRequiredMixin, MultiplePermissionsRequiredMixin, BaseDetailView,
         WeasyTemplateResponseMixin):
 
-    # TODO: prefetch_related() nutzen
     model = models.RechnungSozialamt
     template_name = 'abrechnung/pdf.html'
     permissions = {"any": ('abrechnung.add_rechnungsozialamt',
@@ -169,6 +168,14 @@ class AbrechnungPDFView(LoginRequiredMixin, MultiplePermissionsRequiredMixin, Ba
                            'abrechnung.delete_rechnungsozialamt')
                    }
     raise_exception = True
+
+    def get_queryset(self):
+        return models.RechnungSozialamt.objects.select_related(
+            'sozialamt'
+        ).prefetch_related(
+            'rechnungen_einrichtungen__einrichtung__standort',
+            'rechnungen_einrichtungen__positionen__schueler',
+        )
 
     def get_pdf_stylesheets(self):
         return [
