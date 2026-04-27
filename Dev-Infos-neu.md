@@ -1,4 +1,89 @@
-# I Anlegen der Dev-Umgebung mit Vagrant
+# Entwicklungsumgebung
+
+## I Docker Compose (aktuell empfohlen)
+
+**Voraussetzungen:** Docker Desktop installiert, kein weiteres Setup nötig.
+
+### Starten
+
+```bash
+docker compose up
+```
+
+Startet App (Port 8000) und PostgreSQL-Datenbank. Beim ersten Start wird das Image gebaut (~5 min).
+
+### Erstmalige Einrichtung der Datenbank
+
+```bash
+docker compose exec app make migrate
+docker compose exec app make fixtures
+```
+
+### Entwicklung
+
+Änderungen an Python-Dateien werden **sofort** wirksam (Volume-Mount, Django Auto-Reload).
+
+Bei Änderungen an `requirements/*.pip` oder `setup.py` muss das Image neu gebaut werden:
+
+```bash
+docker compose build app
+docker compose up
+```
+
+### Nützliche Befehle
+
+```bash
+# Tests ausführen
+docker compose exec app make test
+
+# Django Shell
+docker compose exec app make shell
+
+# Migrationen erstellen
+docker compose exec app make makemigrations
+
+# Logs der App
+docker compose logs -f app
+```
+
+### Produktions-Backup einspielen
+
+Backups kommen vom Produktionssystem (PostgreSQL 17, Rolle `absys_lfh_prod`, DB `ABSYS_LFH_PROD`).
+Dump ins Verzeichnis `absys/_db_Backups/` legen (ist gitignored).
+
+```bash
+# DB-Volume wegwerfen und neu starten
+docker compose down -v
+docker compose up -d db
+
+# Produktionsrolle anlegen (für OWNER-Klauseln im Dump)
+docker compose exec db psql -U absys -d postgres -c "CREATE ROLE absys_lfh_prod;"
+
+# Dump kopieren und bereinigt einspielen
+# (entfernt DB-Erstellung, \restrict/\unrestrict und \connect die nur Prod braucht)
+docker cp absys/_db_Backups/DEIN_BACKUP.sql absys-db-1:/tmp/absys.sql
+docker compose exec db bash -c "
+  grep -v '^\\\restrict' /tmp/absys.sql \
+  | grep -v '^\\\unrestrict' \
+  | grep -v '^CREATE DATABASE' \
+  | grep -v '^ALTER DATABASE' \
+  | grep -v '^\\\connect' \
+  | psql -U absys -d absys
+"
+
+# App starten
+docker compose up -d app
+```
+
+Der Fehler `role "bsd" does not exist` am Ende ist harmlos — das ist eine Produktionsrolle für Read-only-Zugriff.
+
+### Umgebungsvariablen
+
+Die Docker-Konfiguration liegt in `envs/docker/`. Anpassungen (z.B. `DJANGO_ALLOWED_HOSTS`) dort vornehmen — keine Änderungen an `envs/dev/` nötig.
+
+---
+
+## II Anlegen der Dev-Umgebung mit Vagrant (deprecated)
 
 ## Voraussetzungen
 - Docker oder VirtualBox als Provider

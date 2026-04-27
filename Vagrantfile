@@ -1,5 +1,9 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
+#
+# DEPRECATED: Die Entwicklungsumgebung läuft jetzt über Docker Compose.
+# Siehe Dev-Infos-neu.md, Abschnitt I.
+# Dieses File bleibt zur Referenz erhalten bis Docker Compose vollständig verifiziert ist.
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
