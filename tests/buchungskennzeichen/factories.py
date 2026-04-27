@@ -3,7 +3,7 @@ import factory
 from absys.apps.buchungskennzeichen import models
 
 
-class BuchungskennzeichenFactory(factory.DjangoModelFactory):
+class BuchungskennzeichenFactory(factory.django.DjangoModelFactory):
 
     buchungskennzeichen = factory.Faker('pystr', max_chars=12)
     verfuegbar = True

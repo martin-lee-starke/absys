@@ -6,7 +6,7 @@ from ..einrichtungen.factories import (SchuelerInEinrichtungFactory,
                                        BettengeldsatzFactory, EinrichtungFactory)
 
 
-class BuchungskennzeichenBenachrichtigungFactory(factory.DjangoModelFactory):
+class BuchungskennzeichenBenachrichtigungFactory(factory.django.DjangoModelFactory):
 
     erledigt = False
 
@@ -14,7 +14,7 @@ class BuchungskennzeichenBenachrichtigungFactory(factory.DjangoModelFactory):
         model = models.BuchungskennzeichenBenachrichtigung
 
 
-class SchuelerInEinrichtungLaeuftAusBenachrichtigungFactory(factory.DjangoModelFactory):
+class SchuelerInEinrichtungLaeuftAusBenachrichtigungFactory(factory.django.DjangoModelFactory):
 
     schueler_in_einrichtung = factory.SubFactory(SchuelerInEinrichtungFactory)
     erledigt = False
@@ -23,7 +23,7 @@ class SchuelerInEinrichtungLaeuftAusBenachrichtigungFactory(factory.DjangoModelF
         model = models.SchuelerInEinrichtungLaeuftAusBenachrichtigung
 
 
-class EinrichtungHatPflegesatzLaeuftAusBenachrichtigungFactory(factory.DjangoModelFactory):
+class EinrichtungHatPflegesatzLaeuftAusBenachrichtigungFactory(factory.django.DjangoModelFactory):
 
     einrichtung_hat_pflegesatz = factory.SubFactory(EinrichtungHatPflegesatzFactory)
     erledigt = False
@@ -32,7 +32,7 @@ class EinrichtungHatPflegesatzLaeuftAusBenachrichtigungFactory(factory.DjangoMod
         model = models.EinrichtungHatPflegesatzLaeuftAusBenachrichtigung
 
 
-class BettengeldsatzLaeuftAusBenachrichtigungFactory(factory.DjangoModelFactory):
+class BettengeldsatzLaeuftAusBenachrichtigungFactory(factory.django.DjangoModelFactory):
 
     bettengeldsatz = factory.SubFactory(BettengeldsatzFactory)
     erledigt = False
@@ -41,7 +41,7 @@ class BettengeldsatzLaeuftAusBenachrichtigungFactory(factory.DjangoModelFactory)
         model = models.BettengeldsatzLaeuftAusBenachrichtigung
 
 
-class FerienBenachrichtigungFactory(factory.DjangoModelFactory):
+class FerienBenachrichtigungFactory(factory.django.DjangoModelFactory):
 
     einrichtung = factory.SubFactory(EinrichtungFactory)
     jahr = factory.Faker('year')
@@ -51,7 +51,7 @@ class FerienBenachrichtigungFactory(factory.DjangoModelFactory):
         model = models.FerienBenachrichtigung
 
 
-class SchliesstageBenachrichtigungFactory(factory.DjangoModelFactory):
+class SchliesstageBenachrichtigungFactory(factory.django.DjangoModelFactory):
 
     einrichtung = factory.SubFactory(EinrichtungFactory)
     jahr = factory.Faker('year')

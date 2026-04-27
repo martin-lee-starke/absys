@@ -5,7 +5,7 @@ from absys.apps.anwesenheitsliste.models import Anwesenheit
 from ..schueler.factories import SchuelerFactory
 
 
-class AnwesenheitFactory(factory.DjangoModelFactory):
+class AnwesenheitFactory(factory.django.DjangoModelFactory):
 
     schueler = factory.SubFactory(SchuelerFactory)
     datum = factory.LazyAttribute(lambda obj: now().date())

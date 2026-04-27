@@ -4,7 +4,7 @@ from django.utils.timezone import now
 from absys.apps.schueler.models import Gruppe, Sozialamt, Schueler
 
 
-class GruppeFactory(factory.DjangoModelFactory):
+class GruppeFactory(factory.django.DjangoModelFactory):
 
     name = factory.Faker('word')
 
@@ -12,7 +12,7 @@ class GruppeFactory(factory.DjangoModelFactory):
         model = Gruppe
 
 
-class SozialamtFactory(factory.DjangoModelFactory):
+class SozialamtFactory(factory.django.DjangoModelFactory):
 
     name = factory.Faker('word')
     anschrift = factory.Faker('address')
@@ -22,7 +22,7 @@ class SozialamtFactory(factory.DjangoModelFactory):
         model = Sozialamt
 
 
-class SchuelerFactory(factory.DjangoModelFactory):
+class SchuelerFactory(factory.django.DjangoModelFactory):
 
     vorname = factory.Faker('first_name')
     nachname = factory.Faker('last_name')
