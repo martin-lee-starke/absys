@@ -27,7 +27,8 @@
     -
     {{ rechnungsozialamt.enddatum|date:"SHORT_DATE_FORMAT" }}</p>
     <p><strong>Einrichtungen zur Abrechnung:</strong><br>
-      {% for einrichtungsrechnung in rechnungsozialamt.rechnungen_einrichtungen.all %}
+      {% with rechnungen_einrichtungen=rechnungsozialamt.rechnungen_einrichtungen.all %}
+      {% for einrichtungsrechnung in rechnungen_einrichtungen %}
         {{ einrichtungsrechnung.name_einrichtung }}{% if not forloop.last %},{% endif %}
       {% endfor %}
     </p>
@@ -35,11 +36,12 @@
 </div>
 
 {# Einrichtungsrechnungen #}
-{% for einrichtungsrechnung in rechnungsozialamt.rechnungen_einrichtungen.all %}
+{% for einrichtungsrechnung in rechnungen_einrichtungen %}
 <div {% if forloop.first %}id="page-2"{% else %}class="page-subsequent">{% endif %}
   {% include 'abrechnung/pdf/_einrichtungsrechnung.html' %}
 </div>
 {% endfor %}
+{% endwith %}
 
 {# Footer #}
 <br><br><br><br>
