@@ -1,0 +1,98 @@
+/* Seitenlayout ------------------------------------------------------------ */
+
+@page {
+    size: A4 landscape;
+    margin: 5mm 3mm;
+}
+
+@page :first {
+    size: A4 portrait;
+    margin-top: 5mm;
+    margin-left: 20mm;
+}
+
+#page-1 {
+    page-break-after: always;
+    break-after: always;
+    font-size: 14pt;
+    line-height: normal;
+}
+
+#address {
+    position: absolute;
+    top: 30mm;
+}
+
+#von {
+    font-size: 6pt;
+}
+
+#an {
+    padding-top: 5mm;
+    font-size: 10pt;
+}
+
+#details {
+    position: absolute;
+    top: 120mm;
+}
+
+#page-2 {
+    page-break-after: always;
+    break-after: always;
+    font-size: 9pt;
+}
+
+.page-subsequent {
+    font-size: 9pt;
+}
+
+/* Tabellen ---------------------------------------------------------------- */
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: inherit;
+}
+
+.table th,
+.table td {
+    padding: 4px 6px;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #ddd;
+    font-weight: bold;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+/* Detailzeilen pro Schüler: kompakt für 31+ Tage auf einer Seite */
+table tr.schuelerposition td {
+    padding: 1px;
+}
+
+/* Häkchen-Symbol (Glyphicon-Ersatz) */
+.glyphicon-ok::before {
+    content: "\2713";
+}
+
+/* Farbkodierung in der Zusammenfassungstabelle */
+.table th.weekend,
+.table td.weekend {
+    background-color: yellow !important;
+}
+
+.table th.zeitraum-kontext,
+.table td.zeitraum-kontext {
+    background-color: lightgrey !important;
+}
+
+.table td.vermindert {
+    background-color: red !important;
+}

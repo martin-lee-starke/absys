@@ -179,9 +179,7 @@ class AbrechnungPDFView(LoginRequiredMixin, MultiplePermissionsRequiredMixin, Ba
 
     def get_pdf_stylesheets(self):
         return [
-            os.path.join(settings.STATIC_ROOT, 'css', 'bootstrap.min.css'),
-            os.path.join(settings.STATIC_ROOT, 'css', 'bootstrap-theme.min.css'),
-            os.path.join(settings.STATIC_ROOT, 'css', 'main.css'),
+            os.path.join(settings.STATIC_ROOT, 'css', 'pdf.css'),
         ]
 
     @property

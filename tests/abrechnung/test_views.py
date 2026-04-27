@@ -21,15 +21,16 @@ class TestAbrechnungPDFViewKonfiguration:
         quelltext = template.template.source
         assert '<link rel="stylesheet"' not in quelltext
 
-    def test_get_pdf_stylesheets_enthaelt_alle_drei_css_dateien(self, settings, tmp_path):
-        """get_pdf_stylesheets() muss Bootstrap, Bootstrap-Theme und main.css enthalten."""
+    def test_get_pdf_stylesheets_enthaelt_nur_pdf_css(self, settings, tmp_path):
+        """get_pdf_stylesheets() darf nur pdf.css enthalten, kein Bootstrap."""
         settings.STATIC_ROOT = str(tmp_path)
         view = AbrechnungPDFView()
         stylesheets = view.get_pdf_stylesheets()
         dateinamen = [os.path.basename(p) for p in stylesheets]
-        assert 'bootstrap.min.css' in dateinamen
-        assert 'bootstrap-theme.min.css' in dateinamen
-        assert 'main.css' in dateinamen
+        assert dateinamen == ['pdf.css'], \
+            "Nur pdf.css erwartet, um WeasyPrint-Rendering zu beschleunigen. Gefunden: {}".format(dateinamen)
+        assert 'bootstrap.min.css' not in dateinamen
+        assert 'bootstrap-theme.min.css' not in dateinamen
 
     def test_get_pdf_stylesheets_pfade_unterhalb_static_root(self, settings, tmp_path):
         """Alle CSS-Pfade müssen unter STATIC_ROOT liegen, nicht per HTTP erreichbar sein."""
