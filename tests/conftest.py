@@ -7,7 +7,8 @@ import pytest
 from faker import Faker
 from pytest_factoryboy import register
 
-from .abrechnung.factories import RechnungSozialamtFactory, RechnungsPositionSchuelerFactory
+from .abrechnung.factories import (RechnungEinrichtungFactory, RechnungSozialamtFactory,
+    RechnungsPositionEinrichtungFactory, RechnungsPositionSchuelerFactory)
 from .anwesenheitsliste.factories import AnwesenheitFactory
 from .buchungskennzeichen.factories import BuchungskennzeichenFactory
 from .einrichtungen.factories import (EinrichtungFactory, EinrichtungHatPflegesatzFactory,
@@ -23,6 +24,8 @@ from .benachrichtigungen.factories import (BuchungskennzeichenBenachrichtigungFa
 
 register(RechnungSozialamtFactory)
 register(RechnungsPositionSchuelerFactory)
+register(RechnungEinrichtungFactory)
+register(RechnungsPositionEinrichtungFactory)
 register(AnwesenheitFactory)
 register(BuchungskennzeichenFactory)
 register(EinrichtungFactory)

@@ -1,4 +1,5 @@
 import datetime
+import decimal
 import random
 
 import factory
@@ -34,3 +35,35 @@ class RechnungsPositionSchuelerFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = models.RechnungsPositionSchueler
+
+
+class RechnungEinrichtungFactory(factory.django.DjangoModelFactory):
+
+    rechnung_sozialamt = factory.SubFactory(RechnungSozialamtFactory)
+    einrichtung = factory.SubFactory(EinrichtungFactory)
+    name_einrichtung = factory.Faker('company')
+    buchungskennzeichen = factory.Faker('bothify', text='??########')
+    datum_faellig = datetime.date(2016, 4, 15)
+    betreuungstage = 20
+
+    class Meta:
+        model = models.RechnungEinrichtung
+
+
+class RechnungsPositionEinrichtungFactory(factory.django.DjangoModelFactory):
+
+    schueler = factory.SubFactory(SchuelerFactory)
+    rechnung_einrichtung = factory.SubFactory(RechnungEinrichtungFactory)
+    fehltage_max = 5
+    anwesend = 20
+    fehltage = 2
+    fehltage_uebertrag = 0
+    fehltage_gesamt = 2
+    fehltage_abrechnung = 2
+    zahltage = 22
+    bargeldbetrag = factory.LazyAttribute(lambda obj: decimal.Decimal('0.00'))
+    bekleidungsgeld = factory.LazyAttribute(lambda obj: decimal.Decimal('0.00'))
+    summe = factory.LazyAttribute(lambda obj: decimal.Decimal('1000.00'))
+
+    class Meta:
+        model = models.RechnungsPositionEinrichtung

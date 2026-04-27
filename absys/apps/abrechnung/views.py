@@ -5,6 +5,7 @@ from braces.views import (LoginRequiredMixin, MessageMixin, MultiplePermissionsR
 from dateutil import parser
 from django.conf import settings
 from django.core.exceptions import ValidationError
+from django.db.models import Prefetch
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.utils.functional import cached_property
@@ -175,13 +176,12 @@ class AbrechnungPDFView(LoginRequiredMixin, MultiplePermissionsRequiredMixin, Ba
         ).prefetch_related(
             'rechnungen_einrichtungen__einrichtung__standort',
             'rechnungen_einrichtungen__positionen__schueler',
+            Prefetch('positionen_schueler', to_attr='_positionen_schueler_cache'),
         )
 
     def get_pdf_stylesheets(self):
         return [
-            os.path.join(settings.STATIC_ROOT, 'css', 'bootstrap.min.css'),
-            os.path.join(settings.STATIC_ROOT, 'css', 'bootstrap-theme.min.css'),
-            os.path.join(settings.STATIC_ROOT, 'css', 'main.css'),
+            os.path.join(settings.STATIC_ROOT, 'css', 'pdf.css'),
         ]
 
     @property

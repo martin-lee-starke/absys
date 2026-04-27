@@ -21,15 +21,16 @@ class TestAbrechnungPDFViewKonfiguration:
         quelltext = template.template.source
         assert '<link rel="stylesheet"' not in quelltext
 
-    def test_get_pdf_stylesheets_enthaelt_alle_drei_css_dateien(self, settings, tmp_path):
-        """get_pdf_stylesheets() muss Bootstrap, Bootstrap-Theme und main.css enthalten."""
+    def test_get_pdf_stylesheets_enthaelt_nur_pdf_css(self, settings, tmp_path):
+        """get_pdf_stylesheets() darf nur pdf.css enthalten, kein Bootstrap."""
         settings.STATIC_ROOT = str(tmp_path)
         view = AbrechnungPDFView()
         stylesheets = view.get_pdf_stylesheets()
         dateinamen = [os.path.basename(p) for p in stylesheets]
-        assert 'bootstrap.min.css' in dateinamen
-        assert 'bootstrap-theme.min.css' in dateinamen
-        assert 'main.css' in dateinamen
+        assert dateinamen == ['pdf.css'], \
+            "Nur pdf.css erwartet, um WeasyPrint-Rendering zu beschleunigen. Gefunden: {}".format(dateinamen)
+        assert 'bootstrap.min.css' not in dateinamen
+        assert 'bootstrap-theme.min.css' not in dateinamen
 
     def test_get_pdf_stylesheets_pfade_unterhalb_static_root(self, settings, tmp_path):
         """Alle CSS-Pfade müssen unter STATIC_ROOT liegen, nicht per HTTP erreichbar sein."""
@@ -67,6 +68,19 @@ class TestAbrechnungPDFViewQuerieoptimierung:
         view = AbrechnungPDFView()
         qs = view.get_queryset()
         assert 'rechnungen_einrichtungen__einrichtung__standort' in qs._prefetch_related_lookups
+
+    def test_get_queryset_prefetcht_positionen_schueler_fuer_detailabrechnung(self):
+        """get_queryset() muss positionen_schueler per Prefetch laden, damit detailabrechnung keine N+1-Queries erzeugt."""
+        from django.db.models import Prefetch
+        view = AbrechnungPDFView()
+        qs = view.get_queryset()
+        # Prefetch-Objekte nutzen prefetch_through für den eigentlichen Relationsnamen
+        prefetch_relationen = [
+            lookup.prefetch_through if isinstance(lookup, Prefetch) else lookup
+            for lookup in qs._prefetch_related_lookups
+        ]
+        assert 'positionen_schueler' in prefetch_relationen, \
+            "positionen_schueler muss als Prefetch-Objekt in get_queryset() enthalten sein."
 
 
 class TestAbrechnungPDFTemplatesQuerieoptimierung:
