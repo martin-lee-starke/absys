@@ -8,7 +8,7 @@ from absys.apps.einrichtungen import models
 from ..schueler.factories import SchuelerFactory
 
 
-class SchliesstagFactory(factory.DjangoModelFactory):
+class SchliesstagFactory(factory.django.DjangoModelFactory):
 
     name = factory.Faker('word')
     datum = factory.LazyAttribute(lambda obj: now().date())
@@ -33,7 +33,7 @@ class SchliesstagFactory(factory.DjangoModelFactory):
         )
 
 
-class StandortFactory(factory.DjangoModelFactory):
+class StandortFactory(factory.django.DjangoModelFactory):
 
     anschrift = factory.Faker('address')
     konto_iban = factory.Faker('pyint')
@@ -44,7 +44,7 @@ class StandortFactory(factory.DjangoModelFactory):
         model = models.Standort
 
 
-class EinrichtungFactory(factory.DjangoModelFactory):
+class EinrichtungFactory(factory.django.DjangoModelFactory):
 
     name = factory.Faker('word')
     kuerzel = factory.Sequence(lambda n: '{0}{1}'.format('E', n))
@@ -64,7 +64,7 @@ class EinrichtungFactory(factory.DjangoModelFactory):
         model = models.Einrichtung
 
 
-class BettengeldsatzFactory(factory.DjangoModelFactory):
+class BettengeldsatzFactory(factory.django.DjangoModelFactory):
 
     einrichtung = factory.SubFactory(EinrichtungFactory)
     startdatum = factory.LazyAttribute(lambda obj: now().date() - datetime.timedelta(2))
@@ -88,7 +88,7 @@ class BettengeldsatzFactory(factory.DjangoModelFactory):
             )
 
 
-class EinrichtungHatPflegesatzFactory(factory.DjangoModelFactory):
+class EinrichtungHatPflegesatzFactory(factory.django.DjangoModelFactory):
 
     einrichtung = factory.SubFactory(EinrichtungFactory)
     pflegesatz = factory.Faker('pydecimal', left_digits=2, right_digits=2, positive=True)
@@ -114,7 +114,7 @@ class EinrichtungHatPflegesatzFactory(factory.DjangoModelFactory):
         )
 
 
-class SchuelerInEinrichtungFactory(factory.DjangoModelFactory):
+class SchuelerInEinrichtungFactory(factory.django.DjangoModelFactory):
 
     schueler = factory.SubFactory(SchuelerFactory)
     einrichtung = factory.SubFactory(EinrichtungFactory)
@@ -158,7 +158,7 @@ class SchuelerAngemeldetInEinrichtungFactory(SchuelerFactory):
     angemeldet = factory.RelatedFactory(SchuelerInEinrichtungFactory, 'schueler')
 
 
-class FerienFactory(factory.DjangoModelFactory):
+class FerienFactory(factory.django.DjangoModelFactory):
 
     name = factory.Faker('word')
     startdatum = factory.LazyAttribute(lambda obj: datetime.date(obj.jahr, 2, 2))

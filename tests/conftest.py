@@ -78,7 +78,7 @@ def pytest_runtest_setup(item):
 
     Requires Faker 0.5.3 or newer.
     """
-    Faker().seed(item.nodeid)
+    Faker.seed(item.nodeid)
 
 
 @pytest.fixture

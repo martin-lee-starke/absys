@@ -9,7 +9,7 @@ from ..einrichtungen.factories import EinrichtungFactory
 from ..schueler.factories import SchuelerFactory, SozialamtFactory
 
 
-class RechnungSozialamtFactory(factory.DjangoModelFactory):
+class RechnungSozialamtFactory(factory.django.DjangoModelFactory):
 
     sozialamt = factory.SubFactory(SozialamtFactory)
     startdatum = factory.LazyAttribute(
@@ -24,7 +24,7 @@ class RechnungSozialamtFactory(factory.DjangoModelFactory):
         zeitraum = 30
 
 
-class RechnungsPositionSchuelerFactory(factory.DjangoModelFactory):
+class RechnungsPositionSchuelerFactory(factory.django.DjangoModelFactory):
 
     rechnung_sozialamt = factory.SubFactory(RechnungSozialamtFactory)
     schueler = factory.SubFactory(SchuelerFactory)

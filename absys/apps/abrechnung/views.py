@@ -1,19 +1,21 @@
-from braces.views import (LoginRequiredMixin, PermissionRequiredMixin,
-                          MultiplePermissionsRequiredMixin, MessageMixin)
+import os
+
+from braces.views import (LoginRequiredMixin, MessageMixin, MultiplePermissionsRequiredMixin,
+                          PermissionRequiredMixin)
+from dateutil import parser
 from django.conf import settings
 from django.core.exceptions import ValidationError
-from django.urls import reverse, reverse_lazy
 from django.shortcuts import redirect
+from django.urls import reverse, reverse_lazy
 from django.utils.functional import cached_property
 from django.views.generic import DeleteView, FormView
 from django.views.generic.detail import BaseDetailView, DetailView
 from django.views.generic.list import MultipleObjectMixin
-from dateutil import parser
+from django_weasyprint import WeasyTemplateResponseMixin
 from extra_views import FormSetView, InlineFormSetFactory, UpdateWithInlinesView
 
-from django_weasyprint import WeasyTemplateResponseMixin
-
 from absys.apps.schueler.models import Sozialamt
+
 from . import forms, models, responses
 
 
@@ -168,9 +170,12 @@ class AbrechnungPDFView(LoginRequiredMixin, MultiplePermissionsRequiredMixin, Ba
                    }
     raise_exception = True
 
-    pdf_stylesheets = [
-        settings.STATIC_ROOT + '/css/main.css', #TODO: ggf. Pfad ändern
-    ]
+    def get_pdf_stylesheets(self):
+        return [
+            os.path.join(settings.STATIC_ROOT, 'css', 'bootstrap.min.css'),
+            os.path.join(settings.STATIC_ROOT, 'css', 'bootstrap-theme.min.css'),
+            os.path.join(settings.STATIC_ROOT, 'css', 'main.css'),
+        ]
 
     @property
     def adresse_schule(self):
