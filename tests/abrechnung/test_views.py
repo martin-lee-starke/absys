@@ -1,7 +1,10 @@
 import os
+from unittest.mock import patch
 
 import pytest
+from django.http import HttpResponse
 from django.template.loader import get_template, render_to_string
+from django_weasyprint import WeasyTemplateResponseMixin
 
 from absys.apps.abrechnung import models
 from absys.apps.abrechnung.views import AbrechnungPDFView
@@ -81,6 +84,26 @@ class TestAbrechnungPDFViewQuerieoptimierung:
         ]
         assert 'positionen_schueler' in prefetch_relationen, \
             "positionen_schueler muss als Prefetch-Objekt in get_queryset() enthalten sein."
+
+
+class TestAbrechnungPDFViewDownloadToken:
+    """Tests für das Cookie-Polling-Muster beim PDF-Download (Issue #19)."""
+
+    def test_kein_download_cookie_ohne_token(self, rf):
+        """render_to_response() setzt kein downloadToken-Cookie ohne token-Parameter."""
+        view = AbrechnungPDFView()
+        view.request = rf.get('/')
+        with patch.object(WeasyTemplateResponseMixin, 'render_to_response', return_value=HttpResponse()):
+            response = view.render_to_response({})
+        assert 'downloadToken' not in response.cookies
+
+    def test_render_to_response_setzt_download_cookie(self, rf):
+        """render_to_response() setzt downloadToken-Cookie wenn download_token in GET übergeben."""
+        view = AbrechnungPDFView()
+        view.request = rf.get('/', {'download_token': 'testtoken123'})
+        with patch.object(WeasyTemplateResponseMixin, 'render_to_response', return_value=HttpResponse()):
+            response = view.render_to_response({})
+        assert response.cookies['downloadToken'].value == 'testtoken123'
 
 
 class TestAbrechnungPDFTemplatesQuerieoptimierung:
