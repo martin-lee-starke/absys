@@ -15,7 +15,7 @@ class SSL(object):
 
     SECURE_HSTS_INCLUDE_SUBDOMAINS = values.BooleanValue(True)
 
-    SECURE_HSTS_SECONDS = values. IntegerValue(3600)
+    SECURE_HSTS_SECONDS = values.IntegerValue(31536000)
 
     SECURE_PROXY_SSL_HEADER = values.TupleValue(None)
 
