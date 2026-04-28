@@ -28,7 +28,6 @@ echo "${DJANGO_EMAIL_HOST_PASSWORD}"  | tee /var/envdir/absys/DJANGO_EMAIL_HOST_
  envdir /var/envdir/absys manage.py check --deploy
 # envdir /var/envdir/absys manage.py migrate
  envdir /var/envdir/absys manage.py collectstatic --noinput
- /etc/init.d/apache2 restart
 
 # Täglichen cron job für Benachrichtigungen anlegen
 echo -e "#! /bin/sh\nenvdir /var/envdir/absys manage.py benachrichtige" |  tee /etc/cron.daily/absys_benachrichtigungen
@@ -60,4 +59,4 @@ echo "##########################################################################
 
 envdir /var/envdir/absys manage.py loaddata sites
 
-etc/init.d/apache2 stop
+exec "$@"

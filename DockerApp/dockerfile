@@ -72,4 +72,5 @@ EXPOSE 443
 ENV DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost
 ENV DEFAULT_DATABASE_URL=postgres://absys:absys@localhost/absys
 
-CMD ["/bin/sh", "-c", "/home/vagrant/run.sh; /etc/init.d/apache2 start && tail -f /var/log/apache2/access.log /var/log/apache2/error.log"]
+ENTRYPOINT ["/home/vagrant/run.sh"]
+CMD ["apache2ctl", "-D", "FOREGROUND"]
