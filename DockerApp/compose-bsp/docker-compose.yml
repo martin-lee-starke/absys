@@ -7,12 +7,11 @@ services:
     environment:
       - DJANGO_ALLOWED_HOSTS=lfh.absys.smk.sachsen.de,localhost,127.0.0.1,absys-lfh,abslsh.smk.sachsen.de
       - DEFAULT_DATABASE_URL=postgres://absys:absys@absys-db-lfh/LFHPROD
+      - DJANGO_SECRET_KEY=HIER_ECHTEN_KEY_EINTRAGEN
+      - DJANGO_EMAIL_HOST_PASSWORD=HIER_ECHTES_PASSWORT_EINTRAGEN
       - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
       - TZ=Europe/Berlin
-    command:
-      - /bin/sh
-      - -c
-      - /home/vagrant/run.sh; apache2ctl  -D FOREGROUND
+    command: ["apache2ctl", "-D", "FOREGROUND"]
     networks:
       - proxy-net
       - absys-intern
@@ -61,12 +60,11 @@ services:
     environment:
       - DJANGO_ALLOWED_HOSTS=lfh-test.absys.smk.sachsen.de,localhost,127.0.0.1,absys-lfh-test
       - DEFAULT_DATABASE_URL=postgres://absys:absys@absys-db-lfh/ABSYSTEST
+      - DJANGO_SECRET_KEY=HIER_ECHTEN_KEY_EINTRAGEN
+      - DJANGO_EMAIL_HOST_PASSWORD=HIER_ECHTES_PASSWORT_EINTRAGEN
       - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
       - TZ=Europe/Berlin
-    command:
-      - /bin/sh
-      - -c
-      - /home/vagrant/run.sh; apache2ctl  -D FOREGROUND
+    command: ["apache2ctl", "-D", "FOREGROUND"]
     networks:
       - proxy-net
       - absys-intern

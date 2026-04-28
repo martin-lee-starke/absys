@@ -30,7 +30,7 @@ RUN pip3 install --upgrade pip certifi
 COPY DockerApp/000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY DockerApp/wsgi.conf /etc/apache2/conf-available/wsgi.conf
 
-RUN a2enmod headers ssl && \
+RUN a2enmod headers ssl deflate expires && \
     a2ensite 000-default && \
     a2enconf wsgi
 
@@ -48,9 +48,7 @@ RUN mkdir -p /var/envdir/absys && \
 RUN echo 'absys.config.settings.public' > /var/envdir/absys/DJANGO_SETTINGS_MODULE  && \
     echo 'Staging'                       > /var/envdir/absys/DJANGO_CONFIGURATION    && \
     echo '600'                           > /var/envdir/absys/DEFAULT_CONN_MAX_AGE    && \
-    echo 'INSECURE'                      > /var/envdir/absys/DJANGO_SECRET_KEY       && \
     echo 'noreply@example.com'           > /var/envdir/absys/DJANGO_DEFAULT_FROM_EMAIL && \
-    echo 'INSECURE'                      > /var/envdir/absys/DJANGO_EMAIL_HOST_PASSWORD && \
     echo 'noreply@example.com'           > /var/envdir/absys/DJANGO_EMAIL_HOST_USER  && \
     echo '/home/vagrant/media/'          > /var/envdir/absys/DJANGO_MEDIA_ROOT       && \
     echo '/home/vagrant/static_root/'    > /var/envdir/absys/DJANGO_STATIC_ROOT      && \
@@ -74,4 +72,5 @@ EXPOSE 443
 ENV DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost
 ENV DEFAULT_DATABASE_URL=postgres://absys:absys@localhost/absys
 
-CMD ["/bin/sh", "-c", "/home/vagrant/run.sh; /etc/init.d/apache2 start && tail -f /var/log/apache2/access.log /var/log/apache2/error.log"]
+ENTRYPOINT ["/home/vagrant/run.sh"]
+CMD ["apache2ctl", "-D", "FOREGROUND"]

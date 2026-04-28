@@ -1,0 +1,33 @@
+services:
+  db:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: absys
+      POSTGRES_PASSWORD: absys
+      POSTGRES_DB: absys
+    volumes:
+      - db-local-test:/var/lib/postgresql/data
+      - ./_db_Backups:/backups:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U absys"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    image: ghcr.io/martin-lee-starke/absys:1.6.3
+    ports:
+      - '8443:443'
+    environment:
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1
+      - DEFAULT_DATABASE_URL=postgres://absys:absys@db/absys
+      - DJANGO_SECRET_KEY=local-test-insecure-key-nicht-fuer-produktion
+      - DJANGO_EMAIL_HOST_PASSWORD=dummy
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db-local-test:
+    driver: local
