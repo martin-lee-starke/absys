@@ -1,3 +1,15 @@
+#!/bin/sh
+set -e
+
+# Pflichtfelder prüfen — Container startet nicht ohne diese Variablen
+for VAR in DJANGO_SECRET_KEY DJANGO_EMAIL_HOST_PASSWORD DJANGO_ALLOWED_HOSTS DEFAULT_DATABASE_URL; do
+    eval val=\$$VAR
+    if [ -z "$val" ]; then
+        echo "FEHLER: Pflicht-Umgebungsvariable $VAR ist nicht gesetzt." >&2
+        exit 1
+    fi
+done
+
 # Liste der Hostnamen und Domains, die diese Website ausliefern soll. Hier die
 # IP Adresse und/oder den Domainnamen mit Kommata getrennt eintragen.
 # Bei fehlerhafter Konfiguration ist "Bad Request (400)" im Browser zu sehen.
@@ -8,6 +20,9 @@ echo "${DJANGO_ALLOWED_HOSTS}" |  tee /var/envdir/absys/DJANGO_ALLOWED_HOSTS
 # PASSWORT UNBEDINGT ÄNDERN!
 # postgres://absys:absys@localhost/absys
 echo "${DEFAULT_DATABASE_URL}" |  tee /var/envdir/absys/DEFAULT_DATABASE_URL
+
+echo "${DJANGO_SECRET_KEY}"           | tee /var/envdir/absys/DJANGO_SECRET_KEY
+echo "${DJANGO_EMAIL_HOST_PASSWORD}"  | tee /var/envdir/absys/DJANGO_EMAIL_HOST_PASSWORD
 
 # Deployment Check, Datenbank Migration und Sammeln der statischen Dateien.
  envdir /var/envdir/absys manage.py check --deploy

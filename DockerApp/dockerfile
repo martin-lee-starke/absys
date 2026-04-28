@@ -48,9 +48,7 @@ RUN mkdir -p /var/envdir/absys && \
 RUN echo 'absys.config.settings.public' > /var/envdir/absys/DJANGO_SETTINGS_MODULE  && \
     echo 'Staging'                       > /var/envdir/absys/DJANGO_CONFIGURATION    && \
     echo '600'                           > /var/envdir/absys/DEFAULT_CONN_MAX_AGE    && \
-    echo 'INSECURE'                      > /var/envdir/absys/DJANGO_SECRET_KEY       && \
     echo 'noreply@example.com'           > /var/envdir/absys/DJANGO_DEFAULT_FROM_EMAIL && \
-    echo 'INSECURE'                      > /var/envdir/absys/DJANGO_EMAIL_HOST_PASSWORD && \
     echo 'noreply@example.com'           > /var/envdir/absys/DJANGO_EMAIL_HOST_USER  && \
     echo '/home/vagrant/media/'          > /var/envdir/absys/DJANGO_MEDIA_ROOT       && \
     echo '/home/vagrant/static_root/'    > /var/envdir/absys/DJANGO_STATIC_ROOT      && \
