@@ -26,7 +26,10 @@ echo "${DJANGO_EMAIL_HOST_PASSWORD}"  | tee /var/envdir/absys/DJANGO_EMAIL_HOST_
 
 # Deployment Check, Datenbank Migration und Sammeln der statischen Dateien.
  envdir /var/envdir/absys manage.py check --deploy
- envdir /var/envdir/absys manage.py migrate
+# Migrationen NICHT automatisch ausführen — manuell vor jedem Deployment:
+#   docker exec <container> envdir /var/envdir/absys manage.py migrate --plan
+#   docker exec <container> envdir /var/envdir/absys manage.py migrate
+# envdir /var/envdir/absys manage.py migrate
  envdir /var/envdir/absys manage.py collectstatic --noinput
 
 # Täglichen cron job für Benachrichtigungen anlegen
