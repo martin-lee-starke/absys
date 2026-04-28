@@ -30,7 +30,7 @@ RUN pip3 install --upgrade pip certifi
 COPY DockerApp/000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY DockerApp/wsgi.conf /etc/apache2/conf-available/wsgi.conf
 
-RUN a2enmod headers ssl && \
+RUN a2enmod headers ssl deflate expires && \
     a2ensite 000-default && \
     a2enconf wsgi
 
