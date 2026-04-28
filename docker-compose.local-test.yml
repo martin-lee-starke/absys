@@ -16,7 +16,7 @@ services:
       retries: 10
 
   app:
-    image: ghcr.io/martin-lee-starke/absys:1.6.2
+    image: ghcr.io/martin-lee-starke/absys:1.6.3
     ports:
       - '8443:443'
     environment:
