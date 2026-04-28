@@ -196,6 +196,13 @@ class AbrechnungPDFView(LoginRequiredMixin, MultiplePermissionsRequiredMixin, Ba
             self.object.nummer,
         )
 
+    def render_to_response(self, context, **response_kwargs):
+        response = super().render_to_response(context, **response_kwargs)
+        token = self.request.GET.get('download_token')
+        if token:
+            response.set_cookie('downloadToken', token)
+        return response
+
 
 class RechnungEinrichtungInline(InlineFormSetFactory):
 

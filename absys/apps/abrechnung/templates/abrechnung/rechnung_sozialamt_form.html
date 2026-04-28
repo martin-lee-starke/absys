@@ -32,7 +32,8 @@
               </button>
               <ul class="dropdown-menu">
                 <li>
-                  <a href="{% url 'abrechnung_rechnungsozialamt_pdf' pk=rechnung.pk %}">PDF</a>
+                  <a href="#" class="pdf-download-link"
+                     data-url="{% url 'abrechnung_rechnungsozialamt_pdf' pk=rechnung.pk %}">PDF</a>
                 </li>
                 <li>
                   <a href="{% url 'abrechnung_saxmbs_dat' pk=rechnung.pk %}">SAXMBS</a>
@@ -55,4 +56,41 @@
       {% endfor %}
     </tbody>
   </table>
+
+<div class="modal fade" id="pdf-lade-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <p><strong>PDF wird erstellt&hellip;</strong></p>
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped active" role="progressbar"
+               style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock content %}
+
+{% block extra_js %}
+<script>
+$(function () {
+  $('.pdf-download-link').on('click', function (e) {
+    e.preventDefault();
+    var token = String(Date.now());
+    var url = $(this).data('url') + '?download_token=' + token;
+    $('#pdf-lade-modal').modal({backdrop: 'static', keyboard: false});
+    window.location.href = url;
+    var poller = setInterval(function () {
+      if (document.cookie.indexOf('downloadToken=' + token) !== -1) {
+        clearInterval(poller);
+        document.cookie = 'downloadToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        $('#pdf-lade-modal').modal('hide');
+      }
+    }, 500);
+  });
+});
+</script>
+{% endblock extra_js %}
