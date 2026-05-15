@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from import_export.admin import ImportExportModelAdmin
 from import_export.formats import base_formats
 
@@ -27,7 +27,7 @@ class VerfuegbarFilter(admin.SimpleListFilter):
     def choices(self, changelist):
         for lookup, title in self.lookup_choices:
             yield {
-                'selected': self.value() == force_text(lookup),
+                'selected': self.value() == force_str(lookup),
                 'query_string': changelist.get_query_string({self.parameter_name: lookup}, []),
                 'display': title,
             }
